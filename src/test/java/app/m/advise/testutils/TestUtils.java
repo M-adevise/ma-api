@@ -1,24 +1,13 @@
 package app.m.advise.testutils;
 
-import static app.m.advise.endpoint.rest.model.Fuel.TypeEnum.DIESEL;
-import static app.m.advise.endpoint.rest.model.TravelDescription.AccommodationTypeEnum.HOSTEL;
-import static app.m.advise.endpoint.rest.model.Vehicle.TypeEnum.SMALL_CAR;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
-import app.m.advise.endpoint.rest.model.Fuel;
-import app.m.advise.endpoint.rest.model.TravelDescription;
 import app.m.advise.endpoint.rest.model.User;
-import app.m.advise.endpoint.rest.model.Vehicle;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
 import app.m.advise.service.api.gemini.conf.GeminiConf;
-import app.m.advise.service.api.travelco.TravelCO2Api;
-import app.m.advise.service.api.travelco.payload.AccommodationCarboneFootPrint;
-import app.m.advise.service.api.travelco.payload.AccommodationPayload;
-import app.m.advise.service.api.travelco.payload.TransportCarboneFootPrint;
-import app.m.advise.service.api.travelco.payload.TransportPayload;
 import app.m.advise.service.file.FileStorageService;
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.Candidate;
@@ -31,10 +20,10 @@ import java.net.ServerSocket;
 import java.util.List;
 
 public class TestUtils {
+  private static final String USER1_ID = "user1_id";
+  private static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
   public static String VALID_TOKEN = "valid_token";
   public static String BAD_TOKEN = "bad_token";
-  private static String USER1_ID = "user1_id";
-  private static String USER1_AUTHENTICATION_ID = "user1_authentication_id";
 
   public static ApiClient anApiClient(String token, int serverPort) {
     ApiClient client = new ApiClient();
@@ -76,27 +65,6 @@ public class TestUtils {
     when(fileStorageService.uploadFile(any(), any())).thenReturn("photo.png");
   }
 
-  public static void setTravelApi(TravelCO2Api travelApi) {
-    when(travelApi.evaluateTransport(any(TransportPayload.class)))
-        .thenReturn(
-            TransportCarboneFootPrint.builder()
-                .co2e(10.3)
-                .co2ePP(2.36)
-                .distance(5000)
-                .people(2)
-                .vehicle(new TransportCarboneFootPrint.Vehicle())
-                .build());
-    when(travelApi.evaluateAccommodation(any(AccommodationPayload.class)))
-        .thenReturn(
-            AccommodationCarboneFootPrint.builder()
-                .co2e(10.3)
-                .co2ePP(2.36)
-                .people(2)
-                .nights(2)
-                .type("hotel")
-                .build());
-  }
-
   public static User user1() {
     return new User()
         .id(USER1_ID)
@@ -127,16 +95,5 @@ public class TestUtils {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static TravelDescription travelDescription() {
-    return new TravelDescription()
-        .from("Paris")
-        .to("London")
-        .distance(5000)
-        .people(2)
-        .nights(7)
-        .vehicle(new Vehicle().type(SMALL_CAR).fuel(new Fuel().type(DIESEL)))
-        .accommodationType(HOSTEL);
   }
 }

@@ -1,6 +1,6 @@
 package app.m.advise.endpoint.controller;
 
-import static app.m.advise.endpoint.mapper.RouteRestMapper.parseMediaTypeFromBytes;
+import static app.m.advise.endpoint.mapper.MediaTypeMapper.parseMediaTypeFromBytes;
 import static java.util.UUID.randomUUID;
 
 import app.m.advise.service.FileService;
