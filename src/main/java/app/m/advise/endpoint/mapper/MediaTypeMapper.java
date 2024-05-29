@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MediaTypeMapper {
 
+  private MediaTypeMapper() {}
+
   public static MediaType parseMediaTypeFromBytes(byte[] bytes) {
     Tika tika = new Tika();
     String guessedMediaTypeValue = tika.detect(bytes);
