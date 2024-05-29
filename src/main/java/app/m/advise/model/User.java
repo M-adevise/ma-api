@@ -1,21 +1,21 @@
 package app.m.advise.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import static jakarta.persistence.EnumType.STRING;
+import static org.hibernate.type.SqlTypes.NAMED_ENUM;
+
+import jakarta.persistence.*;
 import java.time.Instant;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.JdbcTypeCode;
 
-@Entity
-@Table(name = "\"user\"")
-@Builder(toBuilder = true)
+@MappedSuperclass
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -39,8 +39,10 @@ public sealed class User permits Doctor, Patient {
   private String photoId;
 
   @Column(unique = true)
-  private String username;
+  private String NIC;
 
+  @Enumerated(STRING)
+  @JdbcTypeCode(NAMED_ENUM)
   private Role role;
 
   public enum Role {

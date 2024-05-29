@@ -12,7 +12,7 @@ public class UserRestMapper {
         .firstName(domain.getFirstName())
         .lastName(domain.getLastName())
         .birthDate(domain.getBirthdate())
-        .username(domain.getUsername())
+        .username(domain.getNIC())
         .authenticationId(domain.getAuthenticationId())
         .email(domain.getEmail())
         .photoId(domain.getPhotoId());
@@ -23,7 +23,7 @@ public class UserRestMapper {
         .id(rest.getId())
         .firstName(rest.getFirstName())
         .lastName(rest.getLastName())
-        .username(rest.getUsername())
+        .NIC(rest.getUsername())
         .birthdate(rest.getBirthDate())
         .authenticationId(rest.getAuthenticationId())
         .email(rest.getEmail())

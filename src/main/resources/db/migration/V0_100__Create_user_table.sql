@@ -6,5 +6,5 @@ create table if not exists "user" (
     birthdate timestamp with time zone,
     authentication_id varchar,
     photo_id varchar,
-    username varchar
+    nic varchar
 );
