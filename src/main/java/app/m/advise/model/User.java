@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.io.Serializable;
 import java.time.Instant;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class User implements Serializable {
+public sealed class User permits Doctor, Patient {
   @Id private String id;
 
   private String firstName;
@@ -41,4 +40,12 @@ public class User implements Serializable {
 
   @Column(unique = true)
   private String username;
+
+  private Role role;
+
+  public enum Role {
+    ADMIN,
+    DOCTOR,
+    PATIENT
+  }
 }
