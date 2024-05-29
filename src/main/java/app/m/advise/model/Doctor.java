@@ -1,24 +1,33 @@
 package app.m.advise.model;
 
-import static app.m.advise.model.User.Role.DOCTOR;
+import static app.m.advise.model.Role.DOCTOR;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import java.time.Instant;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@PrimaryKeyJoinColumn(name = "id")
 @Entity
 @Table(name = "\"doctor\"")
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public final class Doctor extends User {
+public class Doctor extends User {
   @ManyToOne(cascade = ALL, fetch = LAZY)
-  private final Hospital hospital;
+  private Hospital hospital;
 
-  private final String registryNumber;
+  private String registryNumber;
 
   public Doctor(
       String id,

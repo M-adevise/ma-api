@@ -3,7 +3,10 @@ package app.m.advise.model;
 import static jakarta.persistence.EnumType.STRING;
 import static org.hibernate.type.SqlTypes.NAMED_ENUM;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.Instant;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
@@ -21,33 +24,22 @@ import org.hibernate.annotations.JdbcTypeCode;
 @Data
 @EqualsAndHashCode
 @ToString
-public sealed class User permits Doctor, Patient {
+public class User implements Serializable {
   @Id private String id;
 
   private String firstName;
   private String lastName;
-
-  @Column(unique = true)
   private String email;
 
   @Timestamp private Instant birthdate;
 
-  @Column(unique = true)
   private String authenticationId;
 
-  @Column(unique = true)
   private String photoId;
 
-  @Column(unique = true)
   private String NIC;
 
   @Enumerated(STRING)
   @JdbcTypeCode(NAMED_ENUM)
   private Role role;
-
-  public enum Role {
-    ADMIN,
-    DOCTOR,
-    PATIENT
-  }
 }

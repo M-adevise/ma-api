@@ -1,11 +1,15 @@
 package app.m.advise.repository;
 
 import app.m.advise.model.User;
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+@Primary
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-  Optional<User> findByAuthenticationIdAndEmail(String firebaseId, String email);
+public interface UserRepository {
+  User findByAuthenticationIdAndEmail(String firebaseId, String email);
+
+  User findById(String userId);
+
+  User save(User user);
 }
