@@ -71,7 +71,7 @@ public class TestUtils {
         .birthDate(null)
         .firstName("nyhasina")
         .lastName("vagno")
-        .username("nyhasina14")
+        .nic("nyhasina14")
         .email("user1@email.com")
         .photoId("photo_id")
         .authenticationId(USER1_AUTHENTICATION_ID);
@@ -83,7 +83,7 @@ public class TestUtils {
         .birthDate(null)
         .firstName("user2")
         .lastName("user2_lastname")
-        .username("user214")
+        .nic("user214")
         .email("user2@email.com")
         .photoId("photo2_id")
         .authenticationId("user2_auth_id");

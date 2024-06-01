@@ -13,8 +13,8 @@ public class UserValidator implements Consumer<User> {
     if (user.getId() == null) {
       builder.append("id is mandatory. ");
     }
-    if (user.getUsername() == null) {
-      builder.append("username is mandatory");
+    if (user.getNic() == null) {
+      builder.append("NIC is mandatory");
     }
     if (user.getEmail() == null) {
       builder.append("email is mandatory. ");
