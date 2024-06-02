@@ -74,6 +74,8 @@ public class SecurityConf {
                     .permitAll()
                     .requestMatchers(PUT, "/hospitals")
                     .authenticated()
+                    .requestMatchers(GET, "/department/*/doctors")
+                    .authenticated()
                     .requestMatchers(POST, "/signin")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))

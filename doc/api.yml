@@ -241,11 +241,11 @@ paths:
         500:
           $ref: "#/components/responses/500"
 
-  /hospitals/{id}/doctors:
+  /department/{id}/doctors:
     get:
       tags:
         - Department
-      summary: Get list of doctors of a specific hospital
+      summary: Get list of doctors of a specific department
       operationId: getDoctorsByHospitalsId
       parameters:
         - name: id
@@ -382,7 +382,7 @@ components:
         - $ref: "#/components/schemas/User"
       type: object
       properties:
-        hospital_id:
+        department_id:
           type: string
         registry_number:
           type: string

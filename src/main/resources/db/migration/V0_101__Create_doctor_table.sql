@@ -14,7 +14,7 @@ create table if not exists "doctor" (
     email varchar,
     birthdate timestamp with time zone,
     authentication_id varchar,
-    hospital_id varchar references "hospital"(id),
+    department_id varchar,
     photo_id varchar,
     registry_number varchar,
     nic varchar,

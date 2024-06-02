@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
+import app.m.advise.endpoint.rest.model.Doctor;
 import app.m.advise.endpoint.rest.model.Hospital;
 import app.m.advise.endpoint.rest.model.HospitalAdvisor;
 import app.m.advise.endpoint.rest.model.User;
@@ -25,8 +26,9 @@ import java.net.ServerSocket;
 import java.util.List;
 
 public class TestUtils {
-  private static final String USER1_ID = "doctor1_id";
-  private static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
+  public static final String USER1_ID = "doctor1_id";
+  public static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
+  public static final String HOSPITAL1_ID = "hospital1_id";
   public static String VALID_TOKEN = "valid_token";
   public static String BAD_TOKEN = "bad_token";
 
@@ -83,6 +85,21 @@ public class TestUtils {
         .authenticationId(USER1_AUTHENTICATION_ID);
   }
 
+  public static Doctor doctor1() {
+    return new Doctor()
+        .id(USER1_ID)
+        .birthDate(null)
+        .firstName("Ny Hasina")
+        .lastName("VAGNO")
+        .nic("nyhasina14")
+        .email("user1@email.com")
+        .photoId("photo_id")
+        .registryNumber("123456")
+        .departmentId("hospital1_id")
+        .role(Doctor.RoleEnum.DOCTOR)
+        .authenticationId(USER1_AUTHENTICATION_ID);
+  }
+
   public static User advisor() {
     return new User()
         .id("advisor1_id")
@@ -111,7 +128,7 @@ public class TestUtils {
 
   public static Hospital hospital1() {
     return new Hospital()
-        .id("hospital1_id")
+        .id(HOSPITAL1_ID)
         .name("HJRA")
         .stat("STAT123456789")
         .nif("NIF123456789")
