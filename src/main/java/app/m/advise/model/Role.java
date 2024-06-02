@@ -1,7 +1,7 @@
 package app.m.advise.model;
 
 public enum Role {
-  ADMIN,
+  ADVISOR,
   DOCTOR,
   PATIENT
 }

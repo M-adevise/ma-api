@@ -1,7 +1,7 @@
 package app.m.advise.endpoint.security;
 
 import app.m.advise.model.User;
-import app.m.advise.service.UserService;
+import app.m.advise.service.AuthService;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
 import jakarta.servlet.FilterChain;
@@ -19,13 +19,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 public class AuthFilter extends AbstractAuthenticationProcessingFilter {
-  private final UserService userService;
+  private final AuthService authService;
   private final FirebaseService firebaseService;
 
   protected AuthFilter(
-      RequestMatcher requestMatcher, UserService userService, FirebaseService firebase) {
+      RequestMatcher requestMatcher, AuthService authService, FirebaseService firebase) {
     super(requestMatcher);
-    this.userService = userService;
+    this.authService = authService;
     this.firebaseService = firebase;
   }
 
@@ -51,7 +51,7 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
     if (authUser == null) {
       throw new AuthenticationServiceException("Bearer token is expired or invalid");
     }
-    User user = userService.findByAuthenticationIdAndEmail(authUser.getId(), authUser.getEmail());
+    User user = authService.findByAuthenticationIdAndEmail(authUser.getId(), authUser.getEmail());
     var principal = new Principal(token, user);
     UsernamePasswordAuthenticationToken authentication =
         new UsernamePasswordAuthenticationToken(principal, token);

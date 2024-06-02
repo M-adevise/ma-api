@@ -1,5 +1,7 @@
 package app.m.advise.testutils;
 
+import static app.m.advise.endpoint.rest.model.User.RoleEnum.DOCTOR;
+import static app.m.advise.endpoint.rest.model.User.RoleEnum.PATIENT;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -20,7 +22,7 @@ import java.net.ServerSocket;
 import java.util.List;
 
 public class TestUtils {
-  private static final String USER1_ID = "user1_id";
+  private static final String USER1_ID = "doctor1_id";
   private static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
   public static String VALID_TOKEN = "valid_token";
   public static String BAD_TOKEN = "bad_token";
@@ -69,11 +71,12 @@ public class TestUtils {
     return new User()
         .id(USER1_ID)
         .birthDate(null)
-        .firstName("nyhasina")
-        .lastName("vagno")
+        .firstName("Ny Hasina")
+        .lastName("VAGNO")
         .nic("nyhasina14")
         .email("user1@email.com")
         .photoId("photo_id")
+        .role(DOCTOR)
         .authenticationId(USER1_AUTHENTICATION_ID);
   }
 
@@ -86,6 +89,7 @@ public class TestUtils {
         .nic("user214")
         .email("user2@email.com")
         .photoId("photo2_id")
+        .role(PATIENT)
         .authenticationId("user2_auth_id");
   }
 

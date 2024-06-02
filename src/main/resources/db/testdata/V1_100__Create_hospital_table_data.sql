@@ -1,2 +1,2 @@
-insert into "doctor" (id, first_name, last_name, email, birthdate, authentication_id, photo_id, nic) values
-('user1_id', 'nyhasina', 'vagno', 'user1@email.com', null, 'user1_authentication_id', 'photo_id', 'nyhasina14')
+insert into "hospital" (id, name, nif, stat, contact, advisor) values
+('hopistal1_id', 'HJRA', 'NIF123456789', 'STAT123456789', '+261324063616', null);

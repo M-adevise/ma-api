@@ -4,7 +4,6 @@ import static app.m.advise.model.exception.ApiException.ExceptionType.SERVER_EXC
 
 import app.m.advise.endpoint.security.AuthProvider;
 import app.m.advise.model.exception.ApiException;
-import app.m.advise.repository.UserRepository;
 import app.m.advise.service.file.FileStorageService;
 import java.io.IOException;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class FileService {
   private final FileStorageService fileStorageService;
-  private final UserRepository userRepository;
+  private final AuthService authService;
 
   public String uploadFile(String fileId, byte[] file) {
     try {
@@ -26,7 +25,7 @@ public class FileService {
 
   public String updateUserPhoto(String fileId, byte[] file) {
     var authUser = AuthProvider.getUser();
-    userRepository.save(authUser.toBuilder().photoId(fileId).build());
+    authService.updateUserPic(authUser, fileId);
     try {
       return fileStorageService.uploadFile(fileId, file);
     } catch (IOException e) {

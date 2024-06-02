@@ -14,21 +14,9 @@ create table if not exists "doctor" (
     email varchar,
     birthdate timestamp with time zone,
     authentication_id varchar,
-    hospital_id varchar,
+    hospital_id varchar references "hospital"(id),
     photo_id varchar,
     registry_number varchar,
-    nic varchar,
-    role role
-);
-
-create table if not exists "patient" (
-    id varchar primary key not null,
-    first_name varchar,
-    last_name varchar,
-    email varchar,
-    birthdate timestamp with time zone,
-    authentication_id varchar,
-    photo_id varchar,
     nic varchar,
     role role
 );

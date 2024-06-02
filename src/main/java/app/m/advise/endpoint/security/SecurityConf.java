@@ -6,7 +6,7 @@ import static org.springframework.http.HttpMethod.POST;
 
 import app.m.advise.endpoint.matcher.SelfUserMatcher;
 import app.m.advise.model.exception.ForbiddenException;
-import app.m.advise.service.UserService;
+import app.m.advise.service.AuthService;
 import app.m.advise.service.api.firebase.FirebaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -33,17 +33,17 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 public class SecurityConf {
   private final HandlerExceptionResolver exceptionResolver;
   private final AuthProvider provider;
-  private final UserService userService;
+  private final AuthService authService;
   private final FirebaseService firebaseService;
 
   public SecurityConf(
       @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver,
       AuthProvider auth,
-      UserService userService,
+      AuthService authService,
       FirebaseService firebase) {
     exceptionResolver = resolver;
     provider = auth;
-    this.userService = userService;
+    this.authService = authService;
     this.firebaseService = firebase;
   }
 
@@ -94,7 +94,7 @@ public class SecurityConf {
   }
 
   private AuthFilter bearerFilter(RequestMatcher requestMatcher) {
-    AuthFilter bearerFilter = new AuthFilter(requestMatcher, userService, firebaseService);
+    AuthFilter bearerFilter = new AuthFilter(requestMatcher, authService, firebaseService);
     bearerFilter.setAuthenticationManager(authenticationManager());
     bearerFilter.setAuthenticationSuccessHandler(
         (httpServletRequest, httpServletResponse, authentication) -> {});
