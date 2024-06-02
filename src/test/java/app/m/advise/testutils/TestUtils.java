@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
+import app.m.advise.endpoint.rest.model.Hospital;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
@@ -91,6 +92,16 @@ public class TestUtils {
         .photoId("photo2_id")
         .role(PATIENT)
         .authenticationId("user2_auth_id");
+  }
+
+  public static Hospital hospital1() {
+    return new Hospital()
+        .id("hospital1_id")
+        .name("HJRA")
+        .stat("STAT123456789")
+        .nif("NIF123456789")
+        .contact("+261324063616")
+        .advisor(null);
   }
 
   public static int anAvailablePort() {

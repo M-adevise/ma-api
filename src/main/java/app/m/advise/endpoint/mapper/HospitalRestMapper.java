@@ -12,24 +12,29 @@ import org.springframework.stereotype.Component;
 public class HospitalRestMapper {
 
   public Hospital toRest(app.m.advise.model.Hospital domain) {
+    var advisor = domain.getAdvisor();
+    var restAdvisor =
+        advisor == null
+            ? null
+            : new HospitalAdvisor()
+                .schemas(
+                    new User()
+                        .id(advisor.getId())
+                        .firstName(advisor.getFirstName())
+                        .lastName(advisor.getLastName())
+                        .email(advisor.getEmail())
+                        .authenticationId(advisor.getAuthenticationId())
+                        .photoId(advisor.getPhotoId())
+                        .birthDate(advisor.getBirthdate())
+                        .nic(advisor.getNIC())
+                        .role(ADVISOR));
     return new Hospital()
         .id(domain.getId())
         .name(domain.getName())
         .nif(domain.getNIF())
         .stat(domain.getSTAT())
-        .advisor(
-            new HospitalAdvisor()
-                .schemas(
-                    new User()
-                        .id(domain.getAdvisor().getId())
-                        .firstName(domain.getAdvisor().getFirstName())
-                        .lastName(domain.getAdvisor().getLastName())
-                        .email(domain.getAdvisor().getEmail())
-                        .authenticationId(domain.getAdvisor().getAuthenticationId())
-                        .photoId(domain.getAdvisor().getPhotoId())
-                        .birthDate(domain.getAdvisor().getBirthdate())
-                        .nic(domain.getAdvisor().getNIC())
-                        .role(ADVISOR)));
+        .contact(domain.getContact())
+        .advisor(restAdvisor);
   }
 
   public app.m.advise.model.Hospital toDomain(Hospital rest) {

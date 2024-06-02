@@ -56,6 +56,7 @@ public class SecurityConf {
                     new OrRequestMatcher(
                         new AntPathRequestMatcher("/ping"),
                         new AntPathRequestMatcher("/raw/*"),
+                        new AntPathRequestMatcher("/hospitals", GET.name()),
                         new AntPathRequestMatcher("/signup", POST.name()),
                         new AntPathRequestMatcher("/**", OPTIONS.toString())))),
             AnonymousAuthenticationFilter.class)
@@ -68,9 +69,9 @@ public class SecurityConf {
                     .permitAll()
                     .requestMatchers(POST, "/signup")
                     .permitAll()
+                    .requestMatchers(GET, "/hospitals")
+                    .permitAll()
                     .requestMatchers(POST, "/signin")
-                    .authenticated()
-                    .requestMatchers(new SelfUserMatcher(GET, "/users/*", provider))
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))
                     .authenticated()

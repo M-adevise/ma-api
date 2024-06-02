@@ -1,2 +1,2 @@
 insert into "doctor" (id, first_name, last_name, email, birthdate, authentication_id, photo_id, nic, hospital_id, role) values
-('doctor1_id', 'Ny Hasina', 'VAGNO', 'user1@email.com', null, 'user1_authentication_id', 'photo_id', 'nyhasina14', 'hopistal1_id', 'DOCTOR');
+('doctor1_id', 'Ny Hasina', 'VAGNO', 'user1@email.com', null, 'user1_authentication_id', 'photo_id', 'nyhasina14', 'hospital1_id', 'DOCTOR');
