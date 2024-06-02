@@ -1,6 +1,8 @@
 package app.m.advise.endpoint.mapper;
 
 import app.m.advise.endpoint.rest.model.User;
+import app.m.advise.model.Doctor;
+import app.m.advise.model.Patient;
 import app.m.advise.model.Role;
 import org.springframework.stereotype.Component;
 
@@ -47,5 +49,31 @@ public class UserRestMapper {
       case DOCTOR -> User.RoleEnum.DOCTOR;
       case PATIENT -> User.RoleEnum.PATIENT;
     };
+  }
+
+  public static Doctor doctorFrom(app.m.advise.model.User user) {
+    return new Doctor(
+        user.getId(),
+        user.getFirstName(),
+        user.getLastName(),
+        user.getEmail(),
+        user.getBirthdate(),
+        user.getAuthenticationId(),
+        user.getPhotoId(),
+        null,
+        user.getNIC(),
+        null);
+  }
+
+  public static Patient patientFrom(app.m.advise.model.User user) {
+    return new Patient(
+        user.getId(),
+        user.getFirstName(),
+        user.getLastName(),
+        user.getEmail(),
+        user.getBirthdate(),
+        user.getAuthenticationId(),
+        user.getPhotoId(),
+        user.getNIC());
   }
 }

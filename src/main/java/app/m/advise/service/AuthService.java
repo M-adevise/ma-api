@@ -1,7 +1,8 @@
 package app.m.advise.service;
 
-import app.m.advise.model.Doctor;
-import app.m.advise.model.Patient;
+import static app.m.advise.endpoint.mapper.UserRestMapper.doctorFrom;
+import static app.m.advise.endpoint.mapper.UserRestMapper.patientFrom;
+
 import app.m.advise.model.Role;
 import app.m.advise.model.User;
 import app.m.advise.model.exception.NotFoundException;
@@ -42,8 +43,8 @@ public class AuthService {
 
   public User save(User user) {
     if (user.getRole().equals(Role.DOCTOR)) {
-      return doctorRepository.save((Doctor) user);
+      return doctorRepository.save(doctorFrom(user));
     }
-    return patientRepository.save((Patient) user);
+    return patientRepository.save(patientFrom(user));
   }
 }
