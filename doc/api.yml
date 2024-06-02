@@ -216,7 +216,7 @@ paths:
                   $ref: "#/components/schemas/Hospital"
         500:
           $ref: "#/components/responses/500"
-    post:
+    put:
       tags:
         - Department
       summary: Crupdate hospital

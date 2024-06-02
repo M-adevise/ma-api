@@ -44,6 +44,7 @@ public class HospitalRestMapper {
         .name(rest.getName())
         .NIF(rest.getNif())
         .STAT(rest.getStat())
+        .contact(rest.getContact())
         .advisor(
             app.m.advise.model.User.builder()
                 .id(advisor.getId())

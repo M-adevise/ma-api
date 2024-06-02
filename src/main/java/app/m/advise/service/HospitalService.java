@@ -14,4 +14,8 @@ public class HospitalService {
   public List<Hospital> getHospitals() {
     return repository.findAll();
   }
+
+  public List<Hospital> crupdateHospitals(List<Hospital> hospitals) {
+    return repository.saveAll(hospitals);
+  }
 }

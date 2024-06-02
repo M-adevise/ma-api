@@ -6,6 +6,8 @@ import app.m.advise.service.HospitalService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,5 +19,11 @@ public class HospitalController {
   @GetMapping("/hospitals")
   public List<Hospital> getHospitals() {
     return service.getHospitals().stream().map(mapper::toRest).toList();
+  }
+
+  @PutMapping("/hospitals")
+  public List<Hospital> crupdateHospitals(@RequestBody List<Hospital> hospitals) {
+    var toSave = hospitals.stream().map(mapper::toDomain).toList();
+    return service.crupdateHospitals(toSave).stream().map(mapper::toRest).toList();
   }
 }

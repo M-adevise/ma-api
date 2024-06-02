@@ -3,9 +3,11 @@ package app.m.advise.integration;
 import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.hospital1;
+import static app.m.advise.testutils.TestUtils.hospital2;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import app.m.advise.AbstractContextInitializer;
@@ -19,6 +21,7 @@ import app.m.advise.testutils.TestUtils;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,14 +48,26 @@ class HospitalControllerIT {
   }
 
   @Test
-  void read_hospitals() throws ApiException {
+  @Order(1)
+  void read_hospitals_ok() throws ApiException {
     ApiClient client = anApiClient(VALID_TOKEN);
     DepartmentApi api = new DepartmentApi(client);
 
     List<Hospital> actual = api.getHospitals();
 
+    assertTrue(actual.contains(hospital1()));
+  }
+
+  @Test
+  @Order(2)
+  void crupdate_hospitals_ok() throws ApiException {
+    ApiClient client = anApiClient(VALID_TOKEN);
+    DepartmentApi api = new DepartmentApi(client);
+
+    List<Hospital> actual = api.crupdateHospital(List.of(hospital2()));
+
     assertEquals(1, actual.size());
-    assertEquals(hospital1(), actual.get(0));
+    assertEquals(hospital2(), actual.get(0));
   }
 
   static class ContextInitializer extends AbstractContextInitializer {

@@ -3,6 +3,7 @@ package app.m.advise.endpoint.security;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 import app.m.advise.endpoint.matcher.SelfUserMatcher;
 import app.m.advise.model.exception.ForbiddenException;
@@ -71,6 +72,8 @@ public class SecurityConf {
                     .permitAll()
                     .requestMatchers(GET, "/hospitals")
                     .permitAll()
+                    .requestMatchers(PUT, "/hospitals")
+                    .authenticated()
                     .requestMatchers(POST, "/signin")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))

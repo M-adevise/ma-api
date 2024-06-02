@@ -1,5 +1,6 @@
 package app.m.advise.testutils;
 
+import static app.m.advise.endpoint.rest.model.User.RoleEnum.ADVISOR;
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.DOCTOR;
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.PATIENT;
 import static org.mockito.ArgumentMatchers.any;
@@ -7,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
 import app.m.advise.endpoint.rest.model.Hospital;
+import app.m.advise.endpoint.rest.model.HospitalAdvisor;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
@@ -81,6 +83,19 @@ public class TestUtils {
         .authenticationId(USER1_AUTHENTICATION_ID);
   }
 
+  public static User advisor() {
+    return new User()
+        .id("advisor1_id")
+        .birthDate(null)
+        .firstName("John")
+        .lastName("Doe")
+        .nic("advisor")
+        .email("advisor@email.com")
+        .photoId("photo_id")
+        .role(ADVISOR)
+        .authenticationId("auth_id");
+  }
+
   public static User toCreate() {
     return new User()
         .id("user2_id")
@@ -102,6 +117,16 @@ public class TestUtils {
         .nif("NIF123456789")
         .contact("+261324063616")
         .advisor(null);
+  }
+
+  public static Hospital hospital2() {
+    return new Hospital()
+        .id("hospital2_id")
+        .name("CHU")
+        .stat("STAT1234567810")
+        .nif("NIF1234567810")
+        .contact("+261324063617")
+        .advisor(new HospitalAdvisor().schemas(advisor()));
   }
 
   public static int anAvailablePort() {
