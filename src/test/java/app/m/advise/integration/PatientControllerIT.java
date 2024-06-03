@@ -3,6 +3,7 @@ package app.m.advise.integration;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
+import static app.m.advise.testutils.TestUtils.patient1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,6 +51,16 @@ class PatientControllerIT {
     var actual = api.getPatientsByDoctorId(DOCTOR_1_ID);
 
     assertEquals(2, actual.size());
+  }
+
+  @Test
+  void read_patient_by_id_ok() throws ApiException {
+    ApiClient client = anApiClient(VALID_TOKEN);
+    UserApi api = new UserApi(client);
+
+    var actual = api.getPatientById("patien1_id");
+
+    assertEquals(patient1(), actual);
   }
 
   static class ContextInitializer extends AbstractContextInitializer {

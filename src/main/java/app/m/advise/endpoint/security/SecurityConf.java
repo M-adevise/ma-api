@@ -78,6 +78,8 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(GET, "/doctors/*")
                     .authenticated()
+                    .requestMatchers(GET, "/patients/*")
+                    .authenticated()
                     .requestMatchers(GET, "/doctors/*/patients")
                     .authenticated()
                     .requestMatchers(POST, "/signin")

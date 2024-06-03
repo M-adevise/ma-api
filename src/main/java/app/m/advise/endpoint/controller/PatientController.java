@@ -19,4 +19,9 @@ public class PatientController {
   public List<Patient> getPatientsByDoctorId(@PathVariable("id") String dId) {
     return service.getPatientsByDoctorId(dId).stream().map(mapper::toRest).toList();
   }
+
+  @GetMapping("/patients/{id}")
+  public Patient getPatientById(@PathVariable("id") String id) {
+    return mapper.toRest(service.getPatientById(id));
+  }
 }

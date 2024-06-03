@@ -11,6 +11,7 @@ import app.m.advise.endpoint.rest.model.Department;
 import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Doctor;
 import app.m.advise.endpoint.rest.model.Hospital;
+import app.m.advise.endpoint.rest.model.Patient;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
@@ -133,6 +134,20 @@ public class TestUtils {
         .photoId("photo2_id")
         .role(PATIENT)
         .authenticationId("user2_auth_id");
+  }
+
+  public static Patient patient1() {
+    return new Patient()
+        .id("patien1_id")
+        .firstName("Nicolas")
+        .lastName("Jokic")
+        .email("patient1@email.com")
+        .birthDate(null)
+        .authenticationId("patient1_authentication_id")
+        .photoId("photo_id")
+        .nic("151616232626")
+        .role(Patient.RoleEnum.PATIENT)
+        .doctor(doctor1());
   }
 
   public static Hospital hospital1() {

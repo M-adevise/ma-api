@@ -1,6 +1,7 @@
 package app.m.advise.service;
 
 import app.m.advise.model.Patient;
+import app.m.advise.model.exception.NotFoundException;
 import app.m.advise.repository.PatientRepository;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -13,5 +14,11 @@ public class PatientService {
 
   public List<Patient> getPatientsByDoctorId(String dId) {
     return repository.findByDoctorId(dId);
+  }
+
+  public Patient getPatientById(String id) {
+    return repository
+        .findById(id)
+        .orElseThrow(() -> new NotFoundException("Patient." + id + " is not found."));
   }
 }

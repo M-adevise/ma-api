@@ -11,6 +11,7 @@ public class PatientRestMapper {
   private final DoctorRestMapper doctorRestMapper;
 
   public Patient toRest(app.m.advise.model.Patient domain) {
+    var doctor = domain.getDoctor() == null ? null : doctorRestMapper.toRest(domain.getDoctor());
     return new Patient()
         .id(domain.getId())
         .firstName(domain.getFirstName())
@@ -18,7 +19,7 @@ public class PatientRestMapper {
         .birthDate(domain.getBirthdate())
         .email(domain.getEmail())
         .nic(domain.getNIC())
-        .doctor(doctorRestMapper.toRest(domain.getDoctor()))
+        .doctor(doctor)
         .role(toRestRole(domain.getRole()))
         .photoId(domain.getPhotoId())
         .authenticationId(domain.getAuthenticationId());
