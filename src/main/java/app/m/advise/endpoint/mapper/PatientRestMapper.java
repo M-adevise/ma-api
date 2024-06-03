@@ -2,14 +2,15 @@ package app.m.advise.endpoint.mapper;
 
 import app.m.advise.endpoint.rest.model.Patient;
 import app.m.advise.model.Role;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class PatientRestMapper {
+  private final DoctorRestMapper doctorRestMapper;
 
   public Patient toRest(app.m.advise.model.Patient domain) {
-    var doctor = domain.getDoctor() == null ? null : domain.getDoctor();
-
     return new Patient()
         .id(domain.getId())
         .firstName(domain.getFirstName())
@@ -17,7 +18,7 @@ public class PatientRestMapper {
         .birthDate(domain.getBirthdate())
         .email(domain.getEmail())
         .nic(domain.getNIC())
-        .doctorId(doctor == null ? null : domain.getId())
+        .doctor(doctorRestMapper.toRest(domain.getDoctor()))
         .role(toRestRole(domain.getRole()))
         .photoId(domain.getPhotoId())
         .authenticationId(domain.getAuthenticationId());

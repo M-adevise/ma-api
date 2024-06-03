@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Doctor"
+                $ref: "#/components/schemas/Patient"
         "400":
           $ref: "#/components/responses/400"
         "403":
@@ -382,8 +382,8 @@ components:
         - $ref: "#/components/schemas/User"
       type: object
       properties:
-        department_id:
-          type: string
+        department:
+          $ref: '#/components/schemas/Department'
         registry_number:
           type: string
     Patient:
@@ -391,18 +391,14 @@ components:
         - $ref: "#/components/schemas/User"
       type: object
       properties:
-        doctor_id:
-          type: string
-    Hospital:
+        doctor:
+          $ref: "#/components/schemas/Doctor"
+    Department:
       type: object
       properties:
         id:
           type: string
         name:
-          type: string
-        nif:
-          type: string
-        stat:
           type: string
         contact:
           type: string
@@ -411,6 +407,15 @@ components:
           properties:
             schemas:
               $ref: "#/components/schemas/User"
+    Hospital:
+      allOf:
+        - $ref: "#/components/schemas/Department"
+      type: object
+      properties:
+        nif:
+          type: string
+        stat:
+          type: string
 
     AuthenticationPayload:
       type: object

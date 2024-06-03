@@ -7,9 +7,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
+import app.m.advise.endpoint.rest.model.Department;
+import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Doctor;
 import app.m.advise.endpoint.rest.model.Hospital;
-import app.m.advise.endpoint.rest.model.HospitalAdvisor;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.service.api.firebase.FUser;
 import app.m.advise.service.api.firebase.FirebaseService;
@@ -95,9 +96,17 @@ public class TestUtils {
         .email("user1@email.com")
         .photoId("photo_id")
         .registryNumber("123456")
-        .departmentId("hospital1_id")
+        .department(department())
         .role(Doctor.RoleEnum.DOCTOR)
         .authenticationId(USER1_AUTHENTICATION_ID);
+  }
+
+  public static Department department() {
+    return new Department()
+        .id(hospital1().getId())
+        .name(hospital1().getName())
+        .contact(hospital1().getContact())
+        .advisor(hospital1().getAdvisor());
   }
 
   public static User advisor() {
@@ -143,7 +152,7 @@ public class TestUtils {
         .stat("STAT1234567810")
         .nif("NIF1234567810")
         .contact("+261324063617")
-        .advisor(new HospitalAdvisor().schemas(advisor()));
+        .advisor(new DepartmentAdvisor().schemas(advisor()));
   }
 
   public static int anAvailablePort() {

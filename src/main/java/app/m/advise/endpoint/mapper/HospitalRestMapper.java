@@ -2,8 +2,8 @@ package app.m.advise.endpoint.mapper;
 
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.ADVISOR;
 
+import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Hospital;
-import app.m.advise.endpoint.rest.model.HospitalAdvisor;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.model.Role;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class HospitalRestMapper {
     var restAdvisor =
         advisor == null
             ? null
-            : new HospitalAdvisor()
+            : new DepartmentAdvisor()
                 .schemas(
                     new User()
                         .id(advisor.getId())
