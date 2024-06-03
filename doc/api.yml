@@ -390,6 +390,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/User"
       type: object
+      properties:
+        doctor_id:
+          type: string
     Hospital:
       type: object
       properties:

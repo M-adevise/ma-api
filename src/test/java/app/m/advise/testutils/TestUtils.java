@@ -26,7 +26,7 @@ import java.net.ServerSocket;
 import java.util.List;
 
 public class TestUtils {
-  public static final String USER1_ID = "doctor1_id";
+  public static final String DOCTOR_1_ID = "doctor1_id";
   public static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
   public static final String HOSPITAL1_ID = "hospital1_id";
   public static String VALID_TOKEN = "valid_token";
@@ -74,7 +74,7 @@ public class TestUtils {
 
   public static User user1() {
     return new User()
-        .id(USER1_ID)
+        .id(DOCTOR_1_ID)
         .birthDate(null)
         .firstName("Ny Hasina")
         .lastName("VAGNO")
@@ -87,7 +87,7 @@ public class TestUtils {
 
   public static Doctor doctor1() {
     return new Doctor()
-        .id(USER1_ID)
+        .id(DOCTOR_1_ID)
         .birthDate(null)
         .firstName("Ny Hasina")
         .lastName("VAGNO")
