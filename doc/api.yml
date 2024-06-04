@@ -123,7 +123,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Required doctor
+          description: Feedbacks
           content:
             application/json:
               schema:
@@ -156,11 +156,138 @@ paths:
               $ref: "#/components/schemas/Feedback"
       responses:
         "200":
-          description: Required doctor
+          description: Feedback
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feedback"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /appointments/{id}:
+    get:
+      tags:
+        - Activity
+      summary: Read an appointment
+      operationId: readAppointment
+      security: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The appointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Crupdate appointment
+      operationId: crupdateAppointment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Appointment"
+      responses:
+        "200":
+          description: The appointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors/{id}/appointments:
+    get:
+      tags:
+        - Activity
+      summary: Get all appointments of a doctor
+      operationId: getDoctorAppointments
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /patients/{id}/appointments:
+    get:
+      tags:
+        - Activity
+      summary: Get all appointments of a patient
+      operationId: getPatientsAppointments
+      security: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
         "400":
           $ref: "#/components/responses/400"
         "403":
@@ -527,6 +654,24 @@ components:
         creation_datetime:
           type: string
           format: 'date-time'
+
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+        summary:
+          type: string
+        organizer:
+          $ref: "#/components/schemas/Doctor"
+        participants:
+          $ref: "#/components/schemas/Patient"
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
     Page:
       type: integer
       description: Start at `1`
