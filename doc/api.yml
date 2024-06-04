@@ -413,6 +413,72 @@ paths:
         500:
           $ref: "#/components/responses/500"
 
+  /patients/{id}/medical_info:
+    get:
+      tags:
+        - Activity
+      summary: Read medical information about a patient
+      operationId: readMedicalInfo
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Crupdate a medical information
+      operationId: crupdateMedicalInfo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInfo"
+      responses:
+        "200":
+          description: The document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+
   /hospitals:
     get:
       tags:
@@ -672,6 +738,32 @@ components:
         to:
           type: string
           format: date-time
+    MedicalInfo:
+      type: object
+      properties:
+        patient:
+          $ref: "#/components/schemas/Patient"
+        allergy:
+          type: array
+          items:
+            type: string
+        treatment:
+          type: array
+          items:
+            type: object
+            properties:
+              disease:
+                type: string
+              hospital:
+                type: string
+                description: hospital name
+              date:
+                type: string
+                format: 'date-time'
+        creation_datetime:
+          type: string
+          format: 'date-time'
+
     Page:
       type: integer
       description: Start at `1`
