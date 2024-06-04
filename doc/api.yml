@@ -82,7 +82,95 @@ paths:
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
-
+  /doctors:
+    get:
+      tags:
+        - User
+      summary: Get list of doctors
+      operationId: getDoctors
+      security: []
+      responses:
+        "200":
+          description: Required doctor
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Doctor"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors/{id}/feedbacks:
+    get:
+      tags:
+        - Activity
+      summary: Get feedbacks of a specific doctors
+      operationId: getDoctorFeedbacks
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Required doctor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackSummary"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Give feedback to a specific doctor
+      operationId: giveFeedBacks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Feedback"
+      responses:
+        "200":
+          description: Required doctor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feedback"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
   /doctors/{id}:
     get:
       tags:
@@ -416,15 +504,29 @@ components:
           type: string
         stat:
           type: string
-
-    AuthenticationPayload:
+    FeedbackSummary:
       type: object
       properties:
-        email:
+        total_feedbacks:
+          type: integer
+        total_score:
+          type: integer
+        feedbacks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Feedback"
+    Feedback:
+      type: object
+      properties:
+        sender:
+          $ref: "#/components/schemas/Patient"
+        comment:
           type: string
-        provider_id:
+        score:
+          type: integer
+        creation_datetime:
           type: string
-
+          format: 'date-time'
     Page:
       type: integer
       description: Start at `1`
