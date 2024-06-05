@@ -4,7 +4,7 @@ import app.m.advise.endpoint.mapper.UserRestMapper;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.endpoint.security.AuthProvider;
 import app.m.advise.endpoint.validator.UserValidator;
-import app.m.advise.service.UserService;
+import app.m.advise.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class SecurityController {
-  private final UserService service;
+  private final AuthService service;
   private final UserRestMapper mapper;
   private final UserValidator userValidator;
 

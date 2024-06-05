@@ -3,10 +3,11 @@ package app.m.advise.endpoint.security;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 import app.m.advise.endpoint.matcher.SelfUserMatcher;
 import app.m.advise.model.exception.ForbiddenException;
-import app.m.advise.service.UserService;
+import app.m.advise.service.AuthService;
 import app.m.advise.service.api.firebase.FirebaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -33,17 +34,17 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 public class SecurityConf {
   private final HandlerExceptionResolver exceptionResolver;
   private final AuthProvider provider;
-  private final UserService userService;
+  private final AuthService authService;
   private final FirebaseService firebaseService;
 
   public SecurityConf(
       @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver,
       AuthProvider auth,
-      UserService userService,
+      AuthService authService,
       FirebaseService firebase) {
     exceptionResolver = resolver;
     provider = auth;
-    this.userService = userService;
+    this.authService = authService;
     this.firebaseService = firebase;
   }
 
@@ -56,6 +57,7 @@ public class SecurityConf {
                     new OrRequestMatcher(
                         new AntPathRequestMatcher("/ping"),
                         new AntPathRequestMatcher("/raw/*"),
+                        new AntPathRequestMatcher("/hospitals", GET.name()),
                         new AntPathRequestMatcher("/signup", POST.name()),
                         new AntPathRequestMatcher("/**", OPTIONS.toString())))),
             AnonymousAuthenticationFilter.class)
@@ -68,9 +70,19 @@ public class SecurityConf {
                     .permitAll()
                     .requestMatchers(POST, "/signup")
                     .permitAll()
-                    .requestMatchers(POST, "/signin")
+                    .requestMatchers(GET, "/hospitals")
+                    .permitAll()
+                    .requestMatchers(PUT, "/hospitals")
                     .authenticated()
-                    .requestMatchers(new SelfUserMatcher(GET, "/users/*", provider))
+                    .requestMatchers(GET, "/department/*/doctors")
+                    .authenticated()
+                    .requestMatchers(GET, "/doctors/*")
+                    .authenticated()
+                    .requestMatchers(GET, "/patients/*")
+                    .authenticated()
+                    .requestMatchers(GET, "/doctors/*/patients")
+                    .authenticated()
+                    .requestMatchers(POST, "/signin")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))
                     .authenticated()
@@ -94,7 +106,7 @@ public class SecurityConf {
   }
 
   private AuthFilter bearerFilter(RequestMatcher requestMatcher) {
-    AuthFilter bearerFilter = new AuthFilter(requestMatcher, userService, firebaseService);
+    AuthFilter bearerFilter = new AuthFilter(requestMatcher, authService, firebaseService);
     bearerFilter.setAuthenticationManager(authenticationManager());
     bearerFilter.setAuthenticationSuccessHandler(
         (httpServletRequest, httpServletResponse, authentication) -> {});
