@@ -35,7 +35,7 @@ public class UserRestMapper {
         .build();
   }
 
-  private Role toDomainRole(User.RoleEnum role) {
+  private static Role toDomainRole(User.RoleEnum role) {
     return switch (role) {
       case ADVISOR -> Role.ADVISOR;
       case DOCTOR -> Role.DOCTOR;
@@ -43,7 +43,7 @@ public class UserRestMapper {
     };
   }
 
-  private User.RoleEnum toRestRole(Role role) {
+  private static User.RoleEnum toRestRole(Role role) {
     return switch (role) {
       case ADVISOR -> User.RoleEnum.ADVISOR;
       case DOCTOR -> User.RoleEnum.DOCTOR;
@@ -52,28 +52,33 @@ public class UserRestMapper {
   }
 
   public static Doctor doctorFrom(app.m.advise.model.User user) {
-    return new Doctor(
-        user.getId(),
-        user.getFirstName(),
-        user.getLastName(),
-        user.getEmail(),
-        user.getBirthdate(),
-        user.getAuthenticationId(),
-        user.getPhotoId(),
-        null,
-        user.getNIC(),
-        null);
+    return Doctor.builder()
+        .id(user.getId())
+        .lastName(user.getLastName())
+        .firstName(user.getFirstName())
+        .email(user.getEmail())
+        .birthdate(user.getBirthdate())
+        .authenticationId(user.getAuthenticationId())
+        .photoId(user.getPhotoId())
+        .departmentId(null)
+        .NIC(user.getNIC())
+        .registryNumber(null)
+        .role(user.getRole())
+        .build();
   }
 
   public static Patient patientFrom(app.m.advise.model.User user) {
-    return new Patient(
-        user.getId(),
-        user.getFirstName(),
-        user.getLastName(),
-        user.getEmail(),
-        user.getBirthdate(),
-        user.getAuthenticationId(),
-        user.getPhotoId(),
-        user.getNIC());
+    return Patient.builder()
+        .id(user.getId())
+        .lastName(user.getLastName())
+        .firstName(user.getFirstName())
+        .email(user.getEmail())
+        .birthdate(user.getBirthdate())
+        .authenticationId(user.getAuthenticationId())
+        .photoId(user.getPhotoId())
+        .NIC(user.getNIC())
+        .doctor(null)
+        .role(user.getRole())
+        .build();
   }
 }

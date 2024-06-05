@@ -22,10 +22,4 @@ import lombok.experimental.SuperBuilder;
 public class Hospital extends Department {
   private String NIF;
   private String STAT;
-
-  public Hospital(String id, String name, String contact, User advisor, String nif, String stat) {
-    super(id, name, contact, advisor);
-    NIF = nif;
-    STAT = stat;
-  }
 }
