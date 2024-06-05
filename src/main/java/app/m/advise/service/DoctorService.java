@@ -21,4 +21,8 @@ public class DoctorService {
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Doctor." + id + " is not found."));
   }
+
+  public List<Doctor> getDoctors() {
+    return repository.findAll();
+  }
 }

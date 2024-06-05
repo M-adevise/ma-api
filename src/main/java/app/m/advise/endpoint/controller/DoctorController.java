@@ -15,6 +15,11 @@ public class DoctorController {
   private final DoctorService service;
   private final DoctorRestMapper mapper;
 
+  @GetMapping("/doctors")
+  public List<Doctor> getDoctors() {
+    return service.getDoctors().stream().map(mapper::toRest).toList();
+  }
+
   @GetMapping("/doctors/{id}")
   public Doctor getDoctorById(@PathVariable("id") String id) {
     return mapper.toRest(service.getDoctorById(id));
