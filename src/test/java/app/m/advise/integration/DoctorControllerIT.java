@@ -8,6 +8,7 @@ import static app.m.advise.testutils.TestUtils.doctor1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import app.m.advise.AbstractContextInitializer;
@@ -66,6 +67,17 @@ class DoctorControllerIT {
 
     assertEquals(1, actual.size());
     assertEquals(doctor1(), actual.get(0));
+  }
+
+  @Test
+  void read_doctors() throws ApiException {
+    ApiClient client = anApiClient(VALID_TOKEN);
+    UserApi api = new UserApi(client);
+
+    List<Doctor> actual = api.getDoctors();
+
+    assertEquals(1, actual.size());
+    assertTrue(actual.contains(doctor1()));
   }
 
   static class ContextInitializer extends AbstractContextInitializer {
