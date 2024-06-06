@@ -34,6 +34,8 @@ public class DoctorRestMapper {
         .firstName(rest.getFirstName())
         .lastName(rest.getLastName())
         .birthdate(rest.getBirthDate())
+        .authenticationId(rest.getAuthenticationId())
+        .photoId(rest.getPhotoId())
         .email(rest.getEmail())
         .departmentId(rest.getDepartment().getId())
         .NIC(rest.getNic())

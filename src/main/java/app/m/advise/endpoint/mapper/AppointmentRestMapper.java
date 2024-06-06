@@ -19,7 +19,7 @@ public class AppointmentRestMapper {
         .to(domain.getTo())
         .summary(domain.getSummary())
         .organizer(doctorRestMapper.toRest(domain.getOrganizer()))
-        .participants(patientRestMapper.toRest(domain.getParticipant()));
+        .participant(patientRestMapper.toRest(domain.getParticipant()));
   }
 
   public app.m.advise.model.Appointment toDomain(Appointment rest) {
@@ -30,7 +30,7 @@ public class AppointmentRestMapper {
         .to(rest.getTo())
         .creationDatetime(now())
         .organizer(doctorRestMapper.toDomain(rest.getOrganizer()))
-        .participant(patientRestMapper.toDomain(rest.getParticipants()))
+        .participant(patientRestMapper.toDomain(rest.getParticipant()))
         .build();
   }
 }

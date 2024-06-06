@@ -77,7 +77,7 @@ public class UserRestMapper {
         .authenticationId(user.getAuthenticationId())
         .photoId(user.getPhotoId())
         .NIC(user.getNIC())
-        .doctor(null)
+        .doctorId(null)
         .role(user.getRole())
         .build();
   }

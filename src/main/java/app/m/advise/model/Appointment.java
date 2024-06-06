@@ -2,6 +2,7 @@ package app.m.advise.model;
 
 import static jakarta.persistence.CascadeType.ALL;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -40,7 +41,13 @@ public class Appointment implements Serializable {
   @JoinColumn(name = "participant")
   private Patient participant;
 
-  @Timestamp private Instant from;
-  @Timestamp private Instant to;
+  @Timestamp
+  @Column(name = "beginning")
+  private Instant from;
+
+  @Timestamp
+  @Column(name = "ending")
+  private Instant to;
+
   @CreationTimestamp private Instant creationDatetime;
 }

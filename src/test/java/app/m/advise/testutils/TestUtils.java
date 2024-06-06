@@ -159,17 +159,17 @@ public class TestUtils {
         .from(null)
         .to(null)
         .organizer(doctor1())
-        .participants(patient1());
+        .participant(patient1());
   }
 
   public static Appointment appointment2() {
     return new Appointment()
-        .id("appointment_id")
-        .summary("Asthma")
+        .id("appointment2_id")
+        .summary("Cancer")
         .from(null)
         .to(null)
         .organizer(doctor2())
-        .participants(patient2());
+        .participant(patient2());
   }
 
   public static Patient patient1() {
@@ -183,7 +183,7 @@ public class TestUtils {
         .photoId("photo_id")
         .nic("151616232626")
         .role(Patient.RoleEnum.PATIENT)
-        .doctor(doctor1());
+        .doctorId(doctor1().getId());
   }
 
   public static Patient patient2() {
@@ -197,7 +197,7 @@ public class TestUtils {
         .photoId("photo2_id")
         .nic("151616232627")
         .role(Patient.RoleEnum.PATIENT)
-        .doctor(doctor2());
+        .doctorId(doctor2().getId());
   }
 
   public static Hospital hospital1() {

@@ -672,8 +672,9 @@ components:
         - $ref: "#/components/schemas/User"
       type: object
       properties:
-        doctor:
-          $ref: "#/components/schemas/Doctor"
+        doctorId:
+          type: string
+          description: Current doctor
     Department:
       type: object
       properties:
@@ -730,7 +731,7 @@ components:
           type: string
         organizer:
           $ref: "#/components/schemas/Doctor"
-        participants:
+        participant:
           $ref: "#/components/schemas/Patient"
         from:
           type: string
