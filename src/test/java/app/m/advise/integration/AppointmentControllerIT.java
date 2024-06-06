@@ -58,9 +58,9 @@ class AppointmentControllerIT {
     ApiClient client = anApiClient(VALID_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
-    var actual = api.crupdateAppointment("appointment_id", appointment2());
+    var actual = api.crupdateAppointment("appointment2_id", appointment2());
 
-    assertEquals("Cancer", actual.getSummary());
+    assertEquals(appointment2(), actual);
   }
 
   static class ContextInitializer extends AbstractContextInitializer {
