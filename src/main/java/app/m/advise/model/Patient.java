@@ -1,7 +1,6 @@
 package app.m.advise.model;
 
 import static jakarta.persistence.CascadeType.ALL;
-import static jakarta.persistence.FetchType.LAZY;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -27,7 +26,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = false)
 @ToString
 public class Patient extends User {
-  @ManyToOne(cascade = ALL, fetch = LAZY)
+  @ManyToOne(cascade = ALL)
   @JoinColumn(name = "doctor_id")
   private Doctor doctor;
 }
