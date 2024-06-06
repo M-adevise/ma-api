@@ -40,4 +40,19 @@ public class PatientRestMapper {
       case PATIENT -> Patient.RoleEnum.PATIENT;
     };
   }
+
+  public app.m.advise.model.Patient toDomain(Patient rest) {
+    return app.m.advise.model.Patient.builder()
+        .id(rest.getId())
+        .firstName(rest.getFirstName())
+        .lastName(rest.getLastName())
+        .birthdate(rest.getBirthDate())
+        .email(rest.getEmail())
+        .NIC(rest.getNic())
+        .doctor(doctorRestMapper.toDomain(rest.getDoctor()))
+        .role(toDomainRole(rest.getRole()))
+        .photoId(rest.getPhotoId())
+        .authenticationId(rest.getAuthenticationId())
+        .build();
+  }
 }

@@ -65,7 +65,7 @@ class DoctorControllerIT {
 
     List<Doctor> actual = api.getDoctorsByHospitalsId(HOSPITAL1_ID);
 
-    assertEquals(1, actual.size());
+    assertEquals(2, actual.size());
     assertEquals(doctor1(), actual.get(0));
   }
 
@@ -76,7 +76,7 @@ class DoctorControllerIT {
 
     List<Doctor> actual = api.getDoctors();
 
-    assertEquals(1, actual.size());
+    assertEquals(2, actual.size());
     assertTrue(actual.contains(doctor1()));
   }
 

@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
+import app.m.advise.endpoint.rest.model.Appointment;
 import app.m.advise.endpoint.rest.model.Department;
 import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Doctor;
@@ -102,6 +103,21 @@ public class TestUtils {
         .authenticationId(USER1_AUTHENTICATION_ID);
   }
 
+  public static Doctor doctor2() {
+    return new Doctor()
+        .id("doctor2_id")
+        .birthDate(null)
+        .firstName("Ny Hasina2")
+        .lastName("VAGNO")
+        .nic("nyhasina15")
+        .email("user2@email.com")
+        .photoId("photo2_id")
+        .registryNumber("123457")
+        .department(department())
+        .role(Doctor.RoleEnum.DOCTOR)
+        .authenticationId("user2_authentication_id");
+  }
+
   public static Department department() {
     return new Department()
         .id(hospital1().getId())
@@ -136,9 +152,29 @@ public class TestUtils {
         .authenticationId("user2_auth_id");
   }
 
+  public static Appointment appointment1() {
+    return new Appointment()
+        .id("appointment_id")
+        .summary("Asthma")
+        .from(null)
+        .to(null)
+        .organizer(doctor1())
+        .participants(patient1());
+  }
+
+  public static Appointment appointment2() {
+    return new Appointment()
+        .id("appointment_id")
+        .summary("Asthma")
+        .from(null)
+        .to(null)
+        .organizer(doctor2())
+        .participants(patient2());
+  }
+
   public static Patient patient1() {
     return new Patient()
-        .id("patien1_id")
+        .id("patient1_id")
         .firstName("Nicolas")
         .lastName("Jokic")
         .email("patient1@email.com")
@@ -148,6 +184,20 @@ public class TestUtils {
         .nic("151616232626")
         .role(Patient.RoleEnum.PATIENT)
         .doctor(doctor1());
+  }
+
+  public static Patient patient2() {
+    return new Patient()
+        .id("patient2_id")
+        .firstName("Russel")
+        .lastName("Westbrook")
+        .email("patient2@email.com")
+        .birthDate(null)
+        .authenticationId("patient2_authentication_id")
+        .photoId("photo2_id")
+        .nic("151616232627")
+        .role(Patient.RoleEnum.PATIENT)
+        .doctor(doctor2());
   }
 
   public static Hospital hospital1() {

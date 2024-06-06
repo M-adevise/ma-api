@@ -1,16 +1,16 @@
 package app.m.advise.integration;
 
-import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
-import static app.m.advise.testutils.TestUtils.patient1;
+import static app.m.advise.testutils.TestUtils.appointment1;
+import static app.m.advise.testutils.TestUtils.appointment2;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import app.m.advise.AbstractContextInitializer;
-import app.m.advise.endpoint.rest.api.UserApi;
+import app.m.advise.endpoint.rest.api.ActivityApi;
 import app.m.advise.endpoint.rest.client.ApiClient;
 import app.m.advise.endpoint.rest.client.ApiException;
 import app.m.advise.service.api.firebase.FirebaseService;
@@ -27,9 +27,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
-@ContextConfiguration(initializers = PatientControllerIT.ContextInitializer.class)
+@ContextConfiguration(initializers = AppointmentControllerIT.ContextInitializer.class)
 @AutoConfigureMockMvc
-class PatientControllerIT {
+class AppointmentControllerIT {
   @MockBean private FirebaseService firebaseServiceMock;
   @MockBean private FileStorageService fileStorageService;
 
@@ -44,23 +44,23 @@ class PatientControllerIT {
   }
 
   @Test
-  void read_patients_by_doctor_id_ok() throws ApiException {
+  void read_appointment_by_id() throws ApiException {
     ApiClient client = anApiClient(VALID_TOKEN);
-    UserApi api = new UserApi(client);
+    ActivityApi api = new ActivityApi(client);
 
-    var actual = api.getPatientsByDoctorId(DOCTOR_1_ID);
+    var actual = api.readAppointment("appointment_id");
 
-    assertEquals(1, actual.size());
+    assertEquals(appointment1(), actual);
   }
 
   @Test
-  void read_patient_by_id_ok() throws ApiException {
+  void crupdate_appointment_by_id() throws ApiException {
     ApiClient client = anApiClient(VALID_TOKEN);
-    UserApi api = new UserApi(client);
+    ActivityApi api = new ActivityApi(client);
 
-    var actual = api.getPatientById("patient1_id");
+    var actual = api.crupdateAppointment("appointment_id", appointment2());
 
-    assertEquals(patient1(), actual);
+    assertEquals("Cancer", actual.getSummary());
   }
 
   static class ContextInitializer extends AbstractContextInitializer {
