@@ -1,12 +1,15 @@
 package app.m.advise.integration;
 
+import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.appointment1;
 import static app.m.advise.testutils.TestUtils.appointment2;
+import static app.m.advise.testutils.TestUtils.patient1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import app.m.advise.AbstractContextInitializer;
@@ -51,6 +54,26 @@ class AppointmentControllerIT {
     var actual = api.readAppointment("appointment_id");
 
     assertEquals(appointment1(), actual);
+  }
+
+  @Test
+  void read_appointment_by_doctor_id() throws ApiException {
+    ApiClient client = anApiClient(VALID_TOKEN);
+    ActivityApi api = new ActivityApi(client);
+
+    var actual = api.getDoctorAppointments(DOCTOR_1_ID);
+
+    assertTrue(actual.contains(appointment1()));
+  }
+
+  @Test
+  void read_appointment_by_patient_id() throws ApiException {
+    ApiClient client = anApiClient(VALID_TOKEN);
+    ActivityApi api = new ActivityApi(client);
+
+    var actual = api.getPatientsAppointments(patient1().getId());
+
+    assertTrue(actual.contains(appointment1()));
   }
 
   @Test
