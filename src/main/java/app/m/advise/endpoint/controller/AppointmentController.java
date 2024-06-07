@@ -3,6 +3,7 @@ package app.m.advise.endpoint.controller;
 import app.m.advise.endpoint.mapper.AppointmentRestMapper;
 import app.m.advise.endpoint.rest.model.Appointment;
 import app.m.advise.service.AppointmentService;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,5 +26,15 @@ public class AppointmentController {
   @GetMapping("/appointments/{id}")
   public Appointment getAppointmentById(@PathVariable("id") String id) {
     return mapper.toRest(service.getAppointmentById(id));
+  }
+
+  @GetMapping("doctors/{id}/appointments")
+  public List<Appointment> getAppointmentsByDoctor(@PathVariable("id") String id) {
+    return service.getAppointmentByDoctorId(id).stream().map(mapper::toRest).toList();
+  }
+
+  @GetMapping("patients/{id}/appointments")
+  public List<Appointment> getAppointmentsByPatient(@PathVariable("id") String id) {
+    return service.getAppointmentByPatientId(id).stream().map(mapper::toRest).toList();
   }
 }
