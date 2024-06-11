@@ -3,6 +3,7 @@ package app.m.advise.testutils;
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.ADVISOR;
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.DOCTOR;
 import static app.m.advise.endpoint.rest.model.User.RoleEnum.PATIENT;
+import static java.time.Instant.now;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +12,7 @@ import app.m.advise.endpoint.rest.model.Appointment;
 import app.m.advise.endpoint.rest.model.Department;
 import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Doctor;
+import app.m.advise.endpoint.rest.model.Feedback;
 import app.m.advise.endpoint.rest.model.Hospital;
 import app.m.advise.endpoint.rest.model.Patient;
 import app.m.advise.endpoint.rest.model.User;
@@ -101,6 +103,10 @@ public class TestUtils {
         .department(department())
         .role(Doctor.RoleEnum.DOCTOR)
         .authenticationId(USER1_AUTHENTICATION_ID);
+  }
+
+  public static Feedback feedback() {
+    return new Feedback().sender(patient2()).score(4).creationDatetime(now()).comment("Nice");
   }
 
   public static Doctor doctor2() {
