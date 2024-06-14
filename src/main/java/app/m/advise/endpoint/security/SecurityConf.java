@@ -82,6 +82,8 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(GET, "/doctors/*", provider))
                     .hasRole(DOCTOR.getRole())
+                    .requestMatchers(new SelfUserMatcher(PUT, "/doctors/*", provider))
+                    .hasRole(DOCTOR.getRole())
                     .requestMatchers(GET, "/patients/*")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(GET, "/doctors/*/patients", provider))
