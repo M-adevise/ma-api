@@ -82,6 +82,47 @@ paths:
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+  /call/tokens:
+    post:
+      tags:
+        - Security
+      summary: Generate token for a video call
+      operationId: generateToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appId:
+                  type: integer
+                appSecret:
+                  type: string
+                username:
+                  type: string
+      responses:
+        "200":
+          description: Generated token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  expiresIn:
+                    type: integer
+                    description: expiration date-time in seconds
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
   /doctors:
     get:
       tags:
