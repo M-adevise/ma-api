@@ -675,6 +675,8 @@ components:
         doctorId:
           type: string
           description: Current doctor
+        documentId:
+          type: string
     Department:
       type: object
       properties:
