@@ -32,9 +32,11 @@ import java.util.List;
 
 public class TestUtils {
   public static final String DOCTOR_1_ID = "doctor1_id";
-  public static final String USER1_AUTHENTICATION_ID = "user1_authentication_id";
+  public static final String DOCTOR1_AUTHENTICATION_ID = "user1_authentication_id";
+  public static final String PATIENT1_AUTHENTICATION_ID = "patient1_authentication_id";
   public static final String HOSPITAL1_ID = "hospital1_id";
-  public static String VALID_TOKEN = "valid_token";
+  public static String DOCTOR1_TOKEN = "doctor1_token";
+  public static String PATIENT1_TOKEN = "patient1_token";
   public static String BAD_TOKEN = "bad_token";
 
   public static ApiClient anApiClient(String token, int serverPort) {
@@ -67,8 +69,10 @@ public class TestUtils {
   }
 
   public static void setFirebaseService(FirebaseService firebaseService) {
-    when(firebaseService.getUserByBearer(VALID_TOKEN))
-        .thenReturn(new FUser(USER1_AUTHENTICATION_ID, "user1@email.com"));
+    when(firebaseService.getUserByBearer(DOCTOR1_TOKEN))
+        .thenReturn(new FUser(DOCTOR1_AUTHENTICATION_ID, "user1@email.com"));
+    when(firebaseService.getUserByBearer(PATIENT1_TOKEN))
+        .thenReturn(new FUser(PATIENT1_AUTHENTICATION_ID, "patient1@email.com"));
   }
 
   public static void setFileStorageService(FileStorageService fileStorageService)
@@ -87,7 +91,7 @@ public class TestUtils {
         .email("user1@email.com")
         .photoId("photo_id")
         .role(DOCTOR)
-        .authenticationId(USER1_AUTHENTICATION_ID);
+        .authenticationId(DOCTOR1_AUTHENTICATION_ID);
   }
 
   public static Doctor doctor1() {
@@ -102,7 +106,7 @@ public class TestUtils {
         .registryNumber("123456")
         .department(department())
         .role(Doctor.RoleEnum.DOCTOR)
-        .authenticationId(USER1_AUTHENTICATION_ID);
+        .authenticationId(DOCTOR1_AUTHENTICATION_ID);
   }
 
   public static Feedback feedback() {

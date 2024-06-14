@@ -1,7 +1,8 @@
 package app.m.advise.integration;
 
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
+import static app.m.advise.testutils.TestUtils.PATIENT1_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.appointment1;
 import static app.m.advise.testutils.TestUtils.appointment2;
@@ -48,7 +49,7 @@ class AppointmentControllerIT {
 
   @Test
   void read_appointment_by_id() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     var actual = api.readAppointment("appointment_id");
@@ -58,7 +59,7 @@ class AppointmentControllerIT {
 
   @Test
   void read_appointment_by_doctor_id() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     var actual = api.getDoctorAppointments(DOCTOR_1_ID);
@@ -68,7 +69,7 @@ class AppointmentControllerIT {
 
   @Test
   void read_appointment_by_patient_id() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(PATIENT1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     var actual = api.getPatientsAppointments(patient1().getId());
@@ -78,7 +79,7 @@ class AppointmentControllerIT {
 
   @Test
   void crupdate_appointment_by_id() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     var actual = api.crupdateAppointment("appointment2_id", appointment2());

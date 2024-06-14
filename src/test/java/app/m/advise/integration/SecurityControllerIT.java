@@ -1,7 +1,7 @@
 package app.m.advise.integration;
 
 import static app.m.advise.testutils.TestUtils.BAD_TOKEN;
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
@@ -48,7 +48,7 @@ class SecurityControllerIT {
 
   @Test
   void sign_in_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     SecurityApi api = new SecurityApi(client);
 
     User actual = api.signIn();
@@ -58,7 +58,7 @@ class SecurityControllerIT {
 
   @Test
   void sign_up_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     SecurityApi api = new SecurityApi(client);
 
     User actual = api.signUp(toCreate());
