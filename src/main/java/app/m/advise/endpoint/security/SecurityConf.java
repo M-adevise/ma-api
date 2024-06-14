@@ -102,6 +102,8 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))
                     .authenticated()
+                    .requestMatchers(POST, "/call/tokens")
+                    .authenticated()
                     .requestMatchers("/raw/*")
                     .permitAll()
                     .anyRequest()
