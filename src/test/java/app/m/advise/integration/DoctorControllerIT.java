@@ -1,8 +1,8 @@
 package app.m.advise.integration;
 
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.HOSPITAL1_ID;
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.doctor1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
@@ -50,7 +50,7 @@ class DoctorControllerIT {
 
   @Test
   void read_doctor_by_id_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
     var actual = api.getDoctorById(DOCTOR_1_ID);
@@ -60,7 +60,7 @@ class DoctorControllerIT {
 
   @Test
   void read_doctors_by_department_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     DepartmentApi api = new DepartmentApi(client);
 
     List<Doctor> actual = api.getDoctorsByHospitalsId(HOSPITAL1_ID);
@@ -71,7 +71,7 @@ class DoctorControllerIT {
 
   @Test
   void read_doctors() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
     List<Doctor> actual = api.getDoctors();

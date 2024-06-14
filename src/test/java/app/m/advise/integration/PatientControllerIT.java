@@ -1,7 +1,7 @@
 package app.m.advise.integration;
 
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.patient1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
@@ -45,7 +45,7 @@ class PatientControllerIT {
 
   @Test
   void read_patients_by_doctor_id_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
     var actual = api.getPatientsByDoctorId(DOCTOR_1_ID);
@@ -55,7 +55,7 @@ class PatientControllerIT {
 
   @Test
   void read_patient_by_id_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
     var actual = api.getPatientById("patient1_id");

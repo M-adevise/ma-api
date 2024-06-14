@@ -1,7 +1,8 @@
 package app.m.advise.integration;
 
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
+import static app.m.advise.testutils.TestUtils.PATIENT1_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.feedback;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
@@ -47,7 +48,7 @@ class FeedbackControllerIT {
 
   @Test
   void read_feedback_by_doctor_id_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     FeedbackSummary actual = api.getDoctorFeedbacks(DOCTOR_1_ID);
@@ -57,7 +58,7 @@ class FeedbackControllerIT {
 
   @Test
   void crupdate_feedbacks() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(PATIENT1_TOKEN);
     ActivityApi api = new ActivityApi(client);
 
     Feedback actual = api.giveFeedBacks(DOCTOR_1_ID, feedback());

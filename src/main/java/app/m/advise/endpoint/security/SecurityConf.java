@@ -1,5 +1,7 @@
 package app.m.advise.endpoint.security;
 
+import static app.m.advise.model.Role.DOCTOR;
+import static app.m.advise.model.Role.PATIENT;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
@@ -78,24 +80,24 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(GET, "/department/*/doctors")
                     .authenticated()
-                    .requestMatchers(GET, "/doctors/*")
-                    .authenticated()
+                    .requestMatchers(new SelfUserMatcher(GET, "/doctors/*", provider))
+                    .hasRole(DOCTOR.getRole())
                     .requestMatchers(GET, "/patients/*")
                     .authenticated()
-                    .requestMatchers(GET, "/doctors/*/patients")
+                    .requestMatchers(new SelfUserMatcher(GET, "/doctors/*/patients", provider))
                     .authenticated()
                     .requestMatchers(GET, "/doctors/*/feedbacks")
                     .authenticated()
                     .requestMatchers(PUT, "/doctors/*/feedbacks")
-                    .authenticated()
+                    .hasRole(PATIENT.getRole())
                     .requestMatchers(POST, "/signin")
                     .authenticated()
                     .requestMatchers(GET, "/appointments/*")
                     .authenticated()
-                    .requestMatchers(GET, "/doctors/*/appointments")
-                    .authenticated()
-                    .requestMatchers(GET, "/patients/*/appointments")
-                    .authenticated()
+                    .requestMatchers(new SelfUserMatcher(GET, "/doctors/*/appointments", provider))
+                    .hasAnyRole(DOCTOR.getRole())
+                    .requestMatchers(new SelfUserMatcher(GET, "/patients/*/appointments", provider))
+                    .hasAnyRole(PATIENT.getRole())
                     .requestMatchers(PUT, "/appointments/*")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))

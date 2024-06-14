@@ -1,6 +1,6 @@
 package app.m.advise.integration;
 
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.hospital1;
 import static app.m.advise.testutils.TestUtils.hospital2;
@@ -50,7 +50,7 @@ class HospitalControllerIT {
   @Test
   @Order(1)
   void read_hospitals_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     DepartmentApi api = new DepartmentApi(client);
 
     List<Hospital> actual = api.getHospitals();
@@ -61,7 +61,7 @@ class HospitalControllerIT {
   @Test
   @Order(2)
   void crupdate_hospitals_ok() throws ApiException {
-    ApiClient client = anApiClient(VALID_TOKEN);
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
     DepartmentApi api = new DepartmentApi(client);
 
     List<Hospital> actual = api.crupdateHospital(List.of(hospital2()));

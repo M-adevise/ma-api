@@ -1,7 +1,18 @@
 package app.m.advise.model;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
   ADVISOR,
   DOCTOR,
-  PATIENT
+  PATIENT;
+
+  public String getRole() {
+    return name();
+  }
+
+  @Override
+  public String getAuthority() {
+    return "ROLE_" + getRole();
+  }
 }

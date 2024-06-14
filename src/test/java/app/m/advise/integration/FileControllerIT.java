@@ -1,6 +1,6 @@
 package app.m.advise.integration;
 
-import static app.m.advise.testutils.TestUtils.VALID_TOKEN;
+import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
@@ -97,7 +97,7 @@ class FileControllerIT {
         unauthenticatedClient.send(
             HttpRequest.newBuilder()
                 .uri(URI.create(basePath + "/users/" + userId + "/raw"))
-                .header("Authorization", "Bearer " + VALID_TOKEN)
+                .header("Authorization", "Bearer " + DOCTOR1_TOKEN)
                 .POST(HttpRequest.BodyPublishers.ofByteArray(file))
                 .build(),
             HttpResponse.BodyHandlers.ofString());
