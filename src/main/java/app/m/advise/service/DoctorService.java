@@ -25,4 +25,8 @@ public class DoctorService {
   public List<Doctor> getDoctors() {
     return repository.findAll();
   }
+
+  public Doctor crupdate(Doctor toSave) {
+    return repository.save(toSave);
+  }
 }

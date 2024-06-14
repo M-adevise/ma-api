@@ -380,6 +380,11 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
       responses:
         "200":
           description: Crupdated doctor

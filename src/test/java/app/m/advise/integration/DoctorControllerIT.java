@@ -59,6 +59,16 @@ class DoctorControllerIT {
   }
 
   @Test
+  void crupdate_doctor_ok() throws ApiException {
+    ApiClient client = anApiClient(DOCTOR1_TOKEN);
+    UserApi api = new UserApi(client);
+
+    var actual = api.crupdateDoctor(DOCTOR_1_ID, doctor1().nic("3214457888"));
+
+    assertEquals(doctor1().nic("3214457888"), actual);
+  }
+
+  @Test
   void read_doctors_by_department_ok() throws ApiException {
     ApiClient client = anApiClient(DOCTOR1_TOKEN);
     DepartmentApi api = new DepartmentApi(client);

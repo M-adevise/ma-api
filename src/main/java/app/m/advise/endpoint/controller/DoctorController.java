@@ -7,6 +7,8 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,6 +25,12 @@ public class DoctorController {
   @GetMapping("/doctors/{id}")
   public Doctor getDoctorById(@PathVariable("id") String id) {
     return mapper.toRest(service.getDoctorById(id));
+  }
+
+  @PutMapping("/doctors/{id}")
+  public Doctor crupdateDoctor(@PathVariable("id") String id, @RequestBody Doctor doctor) {
+    var toSave = mapper.toDomain(doctor);
+    return mapper.toRest(service.crupdate(toSave));
   }
 
   @GetMapping("/department/{id}/doctors")
