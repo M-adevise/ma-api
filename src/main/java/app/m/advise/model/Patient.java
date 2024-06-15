@@ -25,4 +25,6 @@ import lombok.experimental.SuperBuilder;
 public class Patient extends User {
   @Column(name = "doctor_id")
   private String doctorId;
+
+  private String documentId;
 }

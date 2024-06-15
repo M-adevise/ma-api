@@ -8,5 +8,11 @@ create table if not exists "patient" (
     photo_id varchar,
     doctor_id varchar references "doctor"(id),
     nic varchar,
+    sex sex,
+    contact varchar,
+    country varchar,
+    city varchar,
+    address varchar,
+    document_id varchar,
     role role
 );

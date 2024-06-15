@@ -1,6 +1,7 @@
 package app.m.advise.endpoint.mapper;
 
 import app.m.advise.endpoint.rest.model.Doctor;
+import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.model.Role;
 import app.m.advise.service.DepartmentService;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,11 @@ public class DoctorRestMapper {
         .role(toRestRole(domain.getRole()))
         .photoId(domain.getPhotoId())
         .authenticationId(domain.getAuthenticationId())
+        .address(domain.getAddress())
+        .branch(domain.getBranch())
+        .country(domain.getCountry())
+        .city(domain.getCity())
+        .sex(toUserSexEnum(domain.getSex()))
         .registryNumber(domain.getRegistryNumber());
   }
 
@@ -40,6 +46,11 @@ public class DoctorRestMapper {
         .departmentId(rest.getDepartment().getId())
         .NIC(rest.getNic())
         .role(toDomainRole(rest.getRole()))
+        .address(rest.getAddress())
+        .branch(rest.getBranch())
+        .country(rest.getCountry())
+        .city(rest.getCity())
+        .sex(toDoctorSexEnum(rest.getSex()))
         .registryNumber(rest.getRegistryNumber())
         .build();
   }
@@ -49,6 +60,20 @@ public class DoctorRestMapper {
       case ADVISOR -> Role.ADVISOR;
       case DOCTOR -> Role.DOCTOR;
       case PATIENT -> Role.PATIENT;
+    };
+  }
+
+  private User.SexEnum toDoctorSexEnum(Doctor.SexEnum sexEnum) {
+    return switch (sexEnum) {
+      case MALE -> User.SexEnum.MALE;
+      case FEMININE -> User.SexEnum.FEMININE;
+    };
+  }
+
+  private Doctor.SexEnum toUserSexEnum(User.SexEnum sexEnum) {
+    return switch (sexEnum) {
+      case MALE -> Doctor.SexEnum.MALE;
+      case FEMININE -> Doctor.SexEnum.FEMININE;
     };
   }
 
