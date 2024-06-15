@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Medical Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-size: 10px;
+            font-family: Helvetica, serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .table-head {
+            width: 100%;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .code {
+            width: 110px;
+            height: 110px;
+        }
+
+        .payment-code {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .stamp {
+            width: 190px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        div.image-text {
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            width: 120px;
+        }
+
+        .caption {
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .amount-section p {
+            border: 1px solid black;
+            padding: 4px 8px;
+            margin-left: 250px;
+            width: 150px;
+        }
+
+        th {
+            background-color: grey;
+            color: white;
+        }
+
+        .space-letter {
+            letter-spacing: 3px;
+        }
+
+        th, td {
+            padding: 6px;
+            font-size: 11px;
+        }
+
+        .main-table td {
+            border: 0.5px solid grey;
+        }
+
+        tbody table tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+
+        .muted {
+            color: grey;
+        }
+
+        li {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .main-table tbody > * {
+            page-break-after: auto;
+            page-break-before: auto;
+        }
+
+        .no-break-inside {
+            page-break-inside: avoid;
+        }
+
+        .payment-container {
+            position: relative;
+            text-align: center;
+        }
+    </style>
+    <style>
+        #footer {
+            display: block;
+            position: running(footer);
+            width: 100%;
+        }
+
+        #content {
+            page-break-inside: auto;
+        }
+
+        @page {
+            size: A4;
+            margin-top: 30px;
+            margin-bottom: 120px;
+            @bottom-center {
+                content: element(footer)
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <table class="table-head">
+        <tr>
+            <td>
+                <p>
+                    <img class="logo" src="../static/logo.png" alt="Logo">
+                </p>
+            </td>
+            <td class="text-right">
+                <p>
+                    <img class="logo" src="../static/partenaire.png" alt="Partenaire">
+                </p>
+            </td>
+        </tr>
+    </table>
+    <h1 class="text-center text-underline">DOSSIER MEDICAL INDIVIDUEL</h1>
+    <table class="table-head">
+        <tr>
+            <td>
+                <p>
+                    Dossier No: <span>123456</span>
+                </p>
+            </td>
+            <td class="text-right">
+                <p>
+                    Patient No: <span>654321</span>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <h2 class="text-center text-underline">Données sociodémographiques</h2>
+    <div style="border-bottom: 1px solid black"></div>
+    <table class="table-head">
+        <tr>
+            <td>
+                <p>Nom : <span>Doe</span></p>
+                <p>Prénom(s) : <span>John</span></p>
+                <p>Âge : <span>35</span></p>
+                <p>Sexe : <span>Masculin</span></p>
+                <p>Profession : <span>Ingénieur</span></p>
+                <p>Date de naissance : <span>01/01/1989</span></p>
+                <p>Adresse : <span>123 Rue de la République, 75001 Paris</span></p>
+            </td>
+            <td class="text-right">
+                <p>Pays : <span>France</span></p>
+                <p>Ville : <span>Paris</span></p>
+                <p>Niveau d'instruction : <span>Master</span></p>
+                <p>Contact : <span>+33 123 456 789</span></p>
+                <p>État civil : <span>Marié</span></p>
+                <p>Groupe sanguin : <span>A+</span></p>
+                <p>Allergies : <span>Penicilline</span></p>
+            </td>
+        </tr>
+    </table>
+</header>
+<div style="border-bottom: 1px solid black"></div>
+<h2 class="text-center text-underline">Historique de Maladies</h2>
+<div id="footer">
+    <div class="footer-info" style="font-size: 9px">
+        <div class="content-left">
+            <!-- Information de pied de page -->
+        </div>
+    </div>
+</div>
+<div id="content">
+    <section>
+        <table style="margin: 10px 0px 20px 0px;table-layout: fixed;" class="main-table">
+            <thead class="text-center" style="border: 1px solid black">
+            <tr>
+                <th>Maladie</th>
+                <th>Stade de la maladie</th>
+                <th>Description</th>
+                <th>Début de traitement</th>
+                <th>Fin de traitement</th>
+                <th>Hôpital</th>
+                <th>Médecin Responsable</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Asthme</td>
+                <td>Modéré</td>
+                <td>Crises fréquentes nécessitant un traitement quotidien</td>
+                <td>01/01/2020</td>
+                <td>En cours</td>
+                <td>Hôpital de Paris</td>
+                <td>Dr. Dupont</td>
+            </tr>
+            </tbody>
+        </table>
+        <h2 class="text-center text-underline">Suivi post-opératoire</h2>
+        <table class="table-head">
+            <thead class="text-center" style="border: 1px solid black">
+            <tr>
+                <th>Date</th>
+                <th>Contrôle des paramètres</th>
+                <th>Soins reçus</th>
+                <th>Médicaments</th>
+                <th>Observations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>15/05/2024</td>
+                <td>Température, Tension artérielle</td>
+                <td>Changement de pansement</td>
+                <td>Paracétamol, Ibuprofène</td>
+                <td>Amélioration notable, patient stable</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+<h2 class="text-center text-underline">Information sur le médecin responsable</h2>
+<table class="table-head">
+    <tr>
+        <td>
+            <p>Nom : <span>Dupont</span></p>
+            <p>Prénom(s) : <span>Jean</span></p>
+            <p>Sexe : <span>Masculin</span></p>
+            <p>Spécialité : <span>Pneumologie</span></p>
+        </td>
+        <td class="text-right">
+            <p>Matricule : <span>987654</span></p>
+            <p>Département : <span>Pneumologie</span></p>
+            <p>Pays : <span>France</span></p>
+            <p>Contact : <span>+33 987 654 321</span></p>
+            <p>Email : <span>jean.dupont@hospital.fr</span></p>
+            <p>Adresse : <span>45 Avenue de la Liberté, 75008 Paris</span></p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

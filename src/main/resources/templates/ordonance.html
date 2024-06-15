@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ordonnance Médicale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 12px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        .contact-info, .doctor-info {
+            font-size: 10px;
+        }
+
+        .contact-info p, .doctor-info p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .prescription {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .prescription-item {
+            margin: 10px 0;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <table width="100%">
+        <tr>
+            <td>
+                <img src="../static/logo.png" alt="Logo">
+            </td>
+            <td class="text-right contact-info">
+                <p>Nom de la Clinique</p>
+                <p>Adresse: 123 Rue de la Santé, 75000 Paris</p>
+                <p>Téléphone: +33 123 456 789</p>
+                <p>Email: contact@clinique.fr</p>
+            </td>
+        </tr>
+    </table>
+</header>
+<hr>
+<section class="doctor-info">
+    <p>Dr. Jean Dupont</p>
+    <p>Spécialité: Médecin Généraliste</p>
+    <p>Matricule: 987654</p>
+</section>
+<hr>
+<section class="patient-info">
+    <p>Nom du patient: <span>John Doe</span></p>
+    <p>Âge: <span>35</span></p>
+    <p>Sexe: <span>Masculin</span></p>
+    <p>Date: <span>15/06/2024</span></p>
+</section>
+<hr>
+<section class="prescription">
+    <h2 class="text-center">Ordonnance Médicale</h2>
+    <div class="prescription-item">
+        <p><strong>Médicament 1:</strong> Paracétamol 500mg</p>
+        <p><strong>Posologie:</strong> 1 comprimé, 3 fois par jour pendant 5 jours</p>
+    </div>
+    <div class="prescription-item">
+        <p><strong>Médicament 2:</strong> Ibuprofène 200mg</p>
+        <p><strong>Posologie:</strong> 1 comprimé, 2 fois par jour pendant 7 jours</p>
+    </div>
+    <div class="prescription-item">
+        <p><strong>Médicament 3:</strong> Amoxicilline 500mg</p>
+        <p><strong>Posologie:</strong> 1 comprimé, 3 fois par jour pendant 10 jours</p>
+    </div>
+    <div class="prescription-item">
+        <p><strong>Recommandations:</strong> Repos et hydratation</p>
+    </div>
+</section>
+<hr>
+<footer>
+    <p>Merci de prendre rendez-vous pour une consultation de suivi dans 2 semaines.</p>
+</footer>
+<div class="signature">
+    <p>Signature du médecin:</p>
+    <p>____________________________</p>
+</div>
+</body>
+</html>
