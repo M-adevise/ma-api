@@ -27,6 +27,11 @@ public class HospitalRestMapper {
                         .photoId(advisor.getPhotoId())
                         .birthDate(advisor.getBirthdate())
                         .nic(advisor.getNIC())
+                        .address(advisor.getAddress())
+                        .country(advisor.getCountry())
+                        .city(advisor.getCity())
+                        .contact(advisor.getContact())
+                        .sex(advisor.getSex())
                         .role(ADVISOR));
     return new Hospital()
         .id(domain.getId())
@@ -56,6 +61,11 @@ public class HospitalRestMapper {
                 .birthdate(advisor.getBirthDate())
                 .NIC(advisor.getNic())
                 .role(Role.ADVISOR)
+                .address(advisor.getAddress())
+                .country(advisor.getCountry())
+                .city(advisor.getCity())
+                .contact(advisor.getContact())
+                .sex(advisor.getSex())
                 .build())
         .build();
   }
