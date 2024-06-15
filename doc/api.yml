@@ -860,6 +860,23 @@ components:
           $ref: "#/components/schemas/Patient"
         patient_additional_info:
           $ref: "#/components/schemas/PatientAdditionalInfo"
+        continual_postoperative:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: 'date-time'
+              parameter_control:
+                type: string
+              care:
+                type: string
+              medicines:
+                type: string
+              followup:
+                type: string
+
         treatment:
           type: array
           items:
@@ -877,13 +894,11 @@ components:
               treatment_end:
                 type: string
                 format: 'date-time'
-
               hospital:
                 type: string
                 description: hospital name
-              date:
+              doctor_name:
                 type: string
-                format: 'date-time'
         creation_datetime:
           type: string
           format: 'date-time'

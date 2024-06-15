@@ -83,7 +83,7 @@
         }
 
         th {
-            background-color: grey;
+            background-color: blue;
             color: white;
         }
 
@@ -154,12 +154,12 @@
         <tr>
             <td>
                 <p>
-                    <img class="logo" src="../static/logo.png" alt="Logo">
+                    <img class="logo" src="../static/logo.png" alt="Logo"></img>
                 </p>
             </td>
             <td class="text-right">
                 <p>
-                    <img class="logo" src="../static/partenaire.png" alt="Partenaire">
+                    <img class="logo" src="../static/partenaire.png" alt="Partenaire"></img>
                 </p>
             </td>
         </tr>
@@ -184,36 +184,32 @@
     <table class="table-head">
         <tr>
             <td>
-                <p>Nom : <span>Doe</span></p>
-                <p>Prénom(s) : <span>John</span></p>
+                <p>Nom : <span th:text="${patient.getLastName()}"></span></p>
+                <p>Prénom(s) : <span th:text="${patient.getFirstName()}"></span></p>
                 <p>Âge : <span>35</span></p>
-                <p>Sexe : <span>Masculin</span></p>
-                <p>Profession : <span>Ingénieur</span></p>
-                <p>Contact : <span>+33 987 654 321</span></p>
-                <p>Date de naissance : <span>01/01/1989</span></p>
-                <p>Adresse : <span>123 Rue de la République, 75001 Paris</span></p>
+                <p>Sexe : <span th:text="${patient.getSex()}"></span></p>
+                <p>Profession : <span th:text="${additionalInformation.getProfession()}"></span></p>
+                <p>Contact : <span th:text="${patient.getContact()}"></span></p>
+                <p>Date de naissance : <span th:text="${#dates.format(birthdate, 'dd-MM-yyyy')}"></span></p>
+                <p>Adresse : <span th:text="${patient.getAddress()}"></span></p>
             </td>
             <td class="text-right">
-                <p>Pays : <span>France</span></p>
-                <p>Ville : <span>Paris</span></p>
-                <p>Niveau d'instruction : <span>Master</span></p>
-                <p>Email : <span>patient@email.com</span></p>
-                <p>État civil : <span>Marié</span></p>
-                <p>Groupe sanguin : <span>A+</span></p>
-                <p>Allergies : <span>Penicilline</span></p>
+                <p>Pays : <span th:text="${patient.getCountry()}">France</span></p>
+                <p>Ville : <span th:text="${patient.getCity()}">Paris</span></p>
+                <p>Niveau d'instruction : <span th:text="${additionalInformation.getEducationLevel()}">Master</span></p>
+                <p>Email : <span th:text="${patient.getEmail()}">patient@email.com</span></p>
+                <p>État civil : <span th:text="${additionalInformation.getCivilStatus()}">Marié</span></p>
+                <p>Groupe sanguin : <span th:text="${additionalInformation.getBloodType()}">A+</span></p>
+                <p><strong>Allergies</strong></p>
+                <th:block th:each="allergy : ${additionalInformation.getAllergies()}">
+                    <li th:text="${allergy}"></li>
+                </th:block>
             </td>
         </tr>
     </table>
 </header>
 <div style="border-bottom: 1px solid black"></div>
 <h2 class="text-center text-underline">Historique de Maladies</h2>
-<div id="footer">
-    <div class="footer-info" style="font-size: 9px">
-        <div class="content-left">
-            <!-- Information de pied de page -->
-        </div>
-    </div>
-</div>
 <div id="content">
     <section>
         <table style="margin: 10px 0px 20px 0px;table-layout: fixed;" class="main-table">
@@ -228,17 +224,17 @@
                 <th>Médecin Responsable</th>
             </tr>
             </thead>
-            <tbody>
+            <th:block th:each="treatment : ${treatments}">
             <tr>
-                <td>Asthme</td>
-                <td>Modéré</td>
-                <td>Crises fréquentes nécessitant un traitement quotidien</td>
-                <td>01/01/2020</td>
-                <td>En cours</td>
-                <td>Hôpital de Paris</td>
-                <td>Dr. Dupont</td>
+                <td th:text="${treatment.getDisease()}"></td>
+                <td th:text="${treatment.getStage()}"></td>
+                <td th:text="${treatment.getDescription()}"></td>
+                <td th:text="${treatment.getTreatmentStart()}"></td>
+                <td th:text="${treatment.getTreatmentEnd()}"></td>
+                <td th:text="${treatment.getHospital()}"></td>
+                <td th:text="${treatment.getDoctorName()}"></td>
             </tr>
-            </tbody>
+            </th:block>
         </table>
         <h2 class="text-center text-underline">Suivi post-opératoire</h2>
         <table class="table-head">
@@ -251,15 +247,15 @@
                 <th>Observations</th>
             </tr>
             </thead>
-            <tbody>
+            <th:block th:each="postoper : ${postoperative}">
             <tr>
-                <td>15/05/2024</td>
-                <td>Température, Tension artérielle</td>
-                <td>Changement de pansement</td>
-                <td>Paracétamol, Ibuprofène</td>
-                <td>Amélioration notable, patient stable</td>
+                <td th:text="${postoper.getDate()}"></td>
+                <td th:text="${postoper.getParameterControl()}"></td>
+                <td th:text="${postoper.getCare()}"></td>
+                <td th:text="${postoper.getMedicines()}"></td>
+                <td th:text="${postoper.getFollowup()}"></td>
             </tr>
-            </tbody>
+            </th:block>
         </table>
     </section>
 </div>
@@ -267,18 +263,18 @@
 <table class="table-head">
     <tr>
         <td>
-            <p>Nom : <span>Dupont</span></p>
-            <p>Prénom(s) : <span>Jean</span></p>
-            <p>Sexe : <span>Masculin</span></p>
-            <p>Spécialité : <span>Pneumologie</span></p>
+            <p>Nom : <span th:text="${doctor.getLastName()}"></span></p>
+            <p>Prénom(s) : <span th:text="${doctor.getFirstName()}"></span></p>
+            <p>Sexe : <span th:text="${doctor.getSex()}"></span></p>
+            <p>Spécialité : <span th:text="${doctor.getBranch()}"></span></p>
         </td>
         <td class="text-right">
-            <p>Matricule : <span>987654</span></p>
-            <p>Département : <span>Pneumologie</span></p>
-            <p>Pays : <span>France</span></p>
-            <p>Contact : <span>+33 987 654 321</span></p>
-            <p>Email : <span>jean.dupont@hospital.fr</span></p>
-            <p>Adresse : <span>45 Avenue de la Liberté, 75008 Paris</span></p>
+            <p>Matricule : <span th:text="${doctor.getRegistryNumber()}"></span></p>
+            <p>Département : <span th:text="${department.getName()}"></span></p>
+            <p>Pays : <span th:text="${doctor.getCountry()}"></span></p>
+            <p>Contact : <span th:text="${doctor.getContact()}"></span></p>
+            <p>Email : <span th:text="${doctor.getEmail()}"></span></p>
+            <p>Adresse : <span th:text="${doctor.getAddress()}"></span></p>
         </td>
     </tr>
 </table>
