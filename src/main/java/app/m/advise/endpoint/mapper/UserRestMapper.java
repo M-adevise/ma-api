@@ -18,6 +18,12 @@ public class UserRestMapper {
         .birthDate(domain.getBirthdate())
         .email(domain.getEmail())
         .photoId(domain.getPhotoId())
+        .sex(domain.getSex())
+        .address(domain.getAddress())
+        .country(domain.getCountry())
+        .contact(domain.getContact())
+        .city(domain.getCity())
+        .sex(domain.getSex())
         .role(toRestRole(domain.getRole()));
   }
 
@@ -32,6 +38,11 @@ public class UserRestMapper {
         .email(payload.getEmail())
         .photoId(payload.getPhotoId())
         .role(toDomainRole(payload.getRole()))
+        .address(payload.getAddress())
+        .country(payload.getCountry())
+        .contact(payload.getContact())
+        .city(payload.getCity())
+        .sex(payload.getSex())
         .build();
   }
 
@@ -64,6 +75,12 @@ public class UserRestMapper {
         .NIC(user.getNIC())
         .registryNumber(null)
         .role(user.getRole())
+        .address(user.getAddress())
+        .branch(null)
+        .country(user.getCountry())
+        .contact(user.getContact())
+        .city(user.getCity())
+        .sex(user.getSex())
         .build();
   }
 
@@ -78,6 +95,11 @@ public class UserRestMapper {
         .photoId(user.getPhotoId())
         .NIC(user.getNIC())
         .doctorId(null)
+        .address(user.getAddress())
+        .country(user.getCountry())
+        .city(user.getCity())
+        .contact(user.getContact())
+        .sex(user.getSex())
         .role(user.getRole())
         .build();
   }

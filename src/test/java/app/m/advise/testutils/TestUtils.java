@@ -90,6 +90,7 @@ public class TestUtils {
         .nic("nyhasina14")
         .email("user1@email.com")
         .photoId("photo_id")
+        .sex(User.SexEnum.MALE)
         .role(DOCTOR)
         .authenticationId(DOCTOR1_AUTHENTICATION_ID);
   }
@@ -106,6 +107,7 @@ public class TestUtils {
         .registryNumber("123456")
         .department(department())
         .role(Doctor.RoleEnum.DOCTOR)
+        .sex(Doctor.SexEnum.MALE)
         .authenticationId(DOCTOR1_AUTHENTICATION_ID);
   }
 
@@ -125,6 +127,7 @@ public class TestUtils {
         .registryNumber("123457")
         .department(department())
         .role(Doctor.RoleEnum.DOCTOR)
+        .sex(Doctor.SexEnum.FEMININE)
         .authenticationId("user2_authentication_id");
   }
 
@@ -146,6 +149,7 @@ public class TestUtils {
         .email("advisor@email.com")
         .photoId("photo_id")
         .role(ADVISOR)
+        .sex(User.SexEnum.MALE)
         .authenticationId("auth_id");
   }
 
@@ -159,6 +163,7 @@ public class TestUtils {
         .email("user2@email.com")
         .photoId("photo2_id")
         .role(PATIENT)
+        .sex(User.SexEnum.MALE)
         .authenticationId("user2_auth_id");
   }
 
@@ -193,6 +198,7 @@ public class TestUtils {
         .photoId("photo_id")
         .nic("151616232626")
         .role(Patient.RoleEnum.PATIENT)
+        .sex(Patient.SexEnum.MALE)
         .doctorId(doctor1().getId());
   }
 
@@ -207,6 +213,7 @@ public class TestUtils {
         .photoId("photo2_id")
         .nic("151616232627")
         .role(Patient.RoleEnum.PATIENT)
+        .sex(Patient.SexEnum.MALE)
         .doctorId(doctor2().getId());
   }
 

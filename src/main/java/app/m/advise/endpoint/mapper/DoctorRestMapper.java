@@ -30,6 +30,7 @@ public class DoctorRestMapper {
         .branch(domain.getBranch())
         .country(domain.getCountry())
         .city(domain.getCity())
+        .contact(domain.getContact())
         .sex(toUserSexEnum(domain.getSex()))
         .registryNumber(domain.getRegistryNumber());
   }
@@ -50,6 +51,7 @@ public class DoctorRestMapper {
         .branch(rest.getBranch())
         .country(rest.getCountry())
         .city(rest.getCity())
+        .contact(rest.getContact())
         .sex(toDoctorSexEnum(rest.getSex()))
         .registryNumber(rest.getRegistryNumber())
         .build();
