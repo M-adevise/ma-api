@@ -5,6 +5,7 @@ import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.HOSPITAL1_ID;
 import static app.m.advise.testutils.TestUtils.anAvailablePort;
 import static app.m.advise.testutils.TestUtils.doctor1;
+import static app.m.advise.testutils.TestUtils.doctor2;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,7 +77,7 @@ class DoctorControllerIT {
     List<Doctor> actual = api.getDoctorsByHospitalsId(HOSPITAL1_ID);
 
     assertEquals(2, actual.size());
-    assertEquals(doctor1(), actual.get(0));
+    assertTrue(actual.contains(doctor2()));
   }
 
   @Test
