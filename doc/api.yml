@@ -727,6 +727,19 @@ components:
           type: string
         photo_id:
           type: string
+        sex:
+          type: string
+          enum:
+            - MALE
+            - FEMININE
+        contact:
+          type: string
+        address:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
         role:
           type: string
           enum:
@@ -738,10 +751,33 @@ components:
         - $ref: "#/components/schemas/User"
       type: object
       properties:
+        branch:
+          type: string
         department:
           $ref: '#/components/schemas/Department'
         registry_number:
           type: string
+
+    PatientAdditionalInfo:
+      type: object
+      properties:
+        profession:
+          type: string
+        education_level:
+          type: string
+        civil_status:
+          type: string
+          enum:
+            - BACHELOR
+            - ENGAGED
+            - MARRIED
+            - OTHER
+        blood_type:
+          type: string
+        allergies:
+          type: array
+          items:
+            type: string
     Patient:
       allOf:
         - $ref: "#/components/schemas/User"
@@ -816,15 +852,14 @@ components:
         to:
           type: string
           format: date-time
+
     MedicalInfo:
       type: object
       properties:
         patient:
           $ref: "#/components/schemas/Patient"
-        allergy:
-          type: array
-          items:
-            type: string
+        patient_additional_info:
+          $ref: "#/components/schemas/PatientAdditionalInfo"
         treatment:
           type: array
           items:
@@ -832,6 +867,17 @@ components:
             properties:
               disease:
                 type: string
+              stage:
+                type: string
+              description:
+                type: string
+              treatment_start:
+                type: string
+                format: 'date-time'
+              treatment_end:
+                type: string
+                format: 'date-time'
+
               hospital:
                 type: string
                 description: hospital name
