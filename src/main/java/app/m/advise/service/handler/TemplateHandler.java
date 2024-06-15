@@ -3,8 +3,9 @@ package app.m.advise.service.handler;
 import static app.m.advise.model.exception.ApiException.ExceptionType.CLIENT_EXCEPTION;
 import static app.m.advise.model.exception.ApiException.ExceptionType.SERVER_EXCEPTION;
 
-import app.m.advise.endpoint.rest.model.Doctor;
-import app.m.advise.endpoint.rest.model.Patient;
+import app.m.advise.endpoint.rest.model.MedicalInfo;
+import app.m.advise.model.Department;
+import app.m.advise.model.Doctor;
 import app.m.advise.model.exception.ApiException;
 import app.m.advise.model.exception.BadRequestException;
 import com.lowagie.text.DocumentException;
@@ -13,17 +14,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Date;
+import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+@Component
 public class TemplateHandler {
 
-  public byte[] generatePdf(Doctor doctor, Patient patient, byte[] logoAsBytes, String template) {
+  public byte[] generatePdf(
+      Doctor doctor, Department department, MedicalInfo medicalInfo, String template) {
     ITextRenderer renderer = new ITextRenderer();
-    loadStyle(renderer, doctor, patient, logoAsBytes, template);
+    loadStyle(renderer, doctor, department, medicalInfo, template);
     renderer.layout();
 
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -36,23 +41,32 @@ public class TemplateHandler {
   }
 
   private void loadStyle(
-      ITextRenderer renderer, Doctor doctor, Patient patient, byte[] logoAsBytes, String template) {
-    renderer.setDocumentFromString(parseTemplateToString(doctor, patient, logoAsBytes, template));
+      ITextRenderer renderer,
+      Doctor doctor,
+      Department department,
+      MedicalInfo medicalInfo,
+      String template) {
+    renderer.setDocumentFromString(
+        parseTemplateToString(doctor, department, medicalInfo, template));
   }
 
   private String parseTemplateToString(
-      Doctor doctor, Patient patient, byte[] logoAsBytes, String template) {
+      Doctor doctor, Department department, MedicalInfo medicalInfo, String template) {
     TemplateEngine templateEngine = configureTemplate();
-    Context context = configureContext(doctor, patient, logoAsBytes);
+    Context context = configureContext(doctor, department, medicalInfo);
     return templateEngine.process(template, context);
   }
 
-  private Context configureContext(Doctor doctor, Patient patient, byte[] logoAsBytes) {
+  private Context configureContext(Doctor doctor, Department department, MedicalInfo medicalInfo) {
     Context context = new Context();
-
+    var date = Date.from(medicalInfo.getPatient().getBirthDate());
     context.setVariable("doctor", doctor);
-    context.setVariable("patient", patient);
-    context.setVariable("logo", base64Image(logoAsBytes));
+    context.setVariable("department", department);
+    context.setVariable("patient", medicalInfo.getPatient());
+    context.setVariable("additionalInformation", medicalInfo.getPatientAdditionalInfo());
+    context.setVariable("treatments", medicalInfo.getTreatment());
+    context.setVariable("birthdate", date);
+    context.setVariable("postoperative", medicalInfo.getContinualPostoperative());
     return context;
   }
 
