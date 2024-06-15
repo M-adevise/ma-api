@@ -101,7 +101,7 @@ public class SecurityConf {
                     .requestMatchers(new SelfUserMatcher(GET, "/patients/*/appointments", provider))
                     .hasAnyRole(PATIENT.getRole())
                     .requestMatchers(PUT, "/appointments/*")
-                    .authenticated()
+                    .hasRole(DOCTOR.getRole())
                     .requestMatchers(new SelfUserMatcher(POST, "/users/*/raw", provider))
                     .authenticated()
                     .requestMatchers(POST, "/call/tokens")

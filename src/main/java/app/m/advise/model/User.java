@@ -41,5 +41,14 @@ public class User implements Serializable {
 
   @Enumerated(STRING)
   @JdbcTypeCode(NAMED_ENUM)
+  private app.m.advise.endpoint.rest.model.User.SexEnum sex;
+
+  private String contact;
+  private String address;
+  private String country;
+  private String city;
+
+  @Enumerated(STRING)
+  @JdbcTypeCode(NAMED_ENUM)
   private Role role;
 }

@@ -24,4 +24,5 @@ import lombok.experimental.SuperBuilder;
 public class Doctor extends User {
   private String departmentId;
   private String registryNumber;
+  private String branch;
 }

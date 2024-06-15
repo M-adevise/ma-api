@@ -1,6 +1,7 @@
 package app.m.advise.endpoint.mapper;
 
 import app.m.advise.endpoint.rest.model.Patient;
+import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.model.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class PatientRestMapper {
-  private final DoctorRestMapper doctorRestMapper;
 
   public Patient toRest(app.m.advise.model.Patient domain) {
     return new Patient()
@@ -21,7 +21,26 @@ public class PatientRestMapper {
         .doctorId(domain.getDoctorId())
         .role(toRestRole(domain.getRole()))
         .photoId(domain.getPhotoId())
+        .address(domain.getAddress())
+        .country(domain.getCountry())
+        .city(domain.getCity())
+        .sex(toUserSexEnum(domain.getSex()))
+        .documentId(domain.getDocumentId())
         .authenticationId(domain.getAuthenticationId());
+  }
+
+  private User.SexEnum toPatientSexEnum(Patient.SexEnum sexEnum) {
+    return switch (sexEnum) {
+      case MALE -> User.SexEnum.MALE;
+      case FEMININE -> User.SexEnum.FEMININE;
+    };
+  }
+
+  private Patient.SexEnum toUserSexEnum(User.SexEnum sexEnum) {
+    return switch (sexEnum) {
+      case MALE -> Patient.SexEnum.MALE;
+      case FEMININE -> Patient.SexEnum.FEMININE;
+    };
   }
 
   private Role toDomainRole(Patient.RoleEnum role) {
@@ -52,6 +71,11 @@ public class PatientRestMapper {
         .role(toDomainRole(rest.getRole()))
         .photoId(rest.getPhotoId())
         .authenticationId(rest.getAuthenticationId())
+        .address(rest.getAddress())
+        .country(rest.getCountry())
+        .city(rest.getCity())
+        .sex(toPatientSexEnum(rest.getSex()))
+        .documentId(rest.getDocumentId())
         .build();
   }
 }
