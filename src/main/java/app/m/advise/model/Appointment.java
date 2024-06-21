@@ -37,6 +37,8 @@ public class Appointment implements Serializable {
   @JoinColumn(name = "organizer")
   private Doctor organizer;
 
+  private String roomId;
+
   @ManyToOne(cascade = ALL)
   @JoinColumn(name = "participant")
   private Patient participant;

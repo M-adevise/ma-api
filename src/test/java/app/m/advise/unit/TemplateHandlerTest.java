@@ -20,7 +20,6 @@ import java.io.OutputStream;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +28,7 @@ public class TemplateHandlerTest {
 
   @Test
   @Disabled
-  //For local test only
+  // For local test only
   void generate_pdf_ok() throws IOException {
     byte[] data = subject.generatePdf(doctor(), department(), medicalInfo(), "document.html");
     File generatedFile = new File(randomUUID() + ".pdf");

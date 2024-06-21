@@ -1,0 +1,1 @@
+alter table "appointment" add column room_id varchar;

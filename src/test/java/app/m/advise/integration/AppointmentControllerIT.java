@@ -10,6 +10,7 @@ import static app.m.advise.testutils.TestUtils.patient1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -84,7 +85,8 @@ class AppointmentControllerIT {
 
     var actual = api.crupdateAppointment("appointment2_id", appointment2());
 
-    assertEquals(appointment2(), actual);
+    assertNotNull(actual.getRoomId());
+    assertEquals(appointment2(), actual.roomId(null));
   }
 
   static class ContextInitializer extends AbstractContextInitializer {
