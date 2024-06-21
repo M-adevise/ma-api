@@ -1,6 +1,7 @@
 package app.m.advise.integration;
 
 import static app.m.advise.testutils.TestUtils.CHANNEL1_ID;
+import static app.m.advise.testutils.TestUtils.CHANNEL2_ID;
 import static app.m.advise.testutils.TestUtils.DOCTOR1_TOKEN;
 import static app.m.advise.testutils.TestUtils.DOCTOR_1_ID;
 import static app.m.advise.testutils.TestUtils.MESSAGE_ID;
@@ -74,7 +75,7 @@ class CommunicationControllerIT {
     ApiClient client = anApiClient(DOCTOR1_TOKEN);
     CommunicationApi api = new CommunicationApi(client);
 
-    var actual = api.crupdateMessage(CHANNEL1_ID, MESSAGE_ID, message());
+    var actual = api.crupdateMessage(CHANNEL2_ID, MESSAGE_ID, message());
 
     assertEquals(message(), actual);
   }
@@ -84,7 +85,7 @@ class CommunicationControllerIT {
     ApiClient client = anApiClient(DOCTOR1_TOKEN);
     CommunicationApi api = new CommunicationApi(client);
 
-    var actual = api.getMessageByChannelId(CHANNEL1_ID, 1, 20);
+    var actual = api.getMessageByChannelId(CHANNEL2_ID, 1, 20);
 
     assertTrue(actual.contains(message2()));
   }
