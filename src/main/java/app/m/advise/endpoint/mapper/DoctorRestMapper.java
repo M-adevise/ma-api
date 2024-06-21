@@ -14,14 +14,16 @@ public class DoctorRestMapper {
   private final DepartmentRestMapper departmentRestMapper;
 
   public Doctor toRest(app.m.advise.model.Doctor domain) {
-    var department = departmentService.getDepartmentById(domain.getDepartmentId());
+    var dpId = domain.getDepartmentId();
+    var department = dpId == null ? null : departmentService.getDepartmentById(dpId);
+    var restDpt = department == null ? null : departmentRestMapper.toRest(department);
     return new Doctor()
         .id(domain.getId())
         .firstName(domain.getFirstName())
         .lastName(domain.getLastName())
         .birthDate(domain.getBirthdate())
         .email(domain.getEmail())
-        .department(departmentRestMapper.toRest(department))
+        .department(restDpt)
         .nic(domain.getNIC())
         .role(toRestRole(domain.getRole()))
         .photoId(domain.getPhotoId())
@@ -36,6 +38,7 @@ public class DoctorRestMapper {
   }
 
   public app.m.advise.model.Doctor toDomain(Doctor rest) {
+    var dptId = rest.getDepartment() == null ? null : rest.getDepartment().getId();
     return app.m.advise.model.Doctor.builder()
         .id(rest.getId())
         .firstName(rest.getFirstName())
@@ -44,7 +47,7 @@ public class DoctorRestMapper {
         .authenticationId(rest.getAuthenticationId())
         .photoId(rest.getPhotoId())
         .email(rest.getEmail())
-        .departmentId(rest.getDepartment().getId())
+        .departmentId(dptId)
         .NIC(rest.getNic())
         .role(toDomainRole(rest.getRole()))
         .address(rest.getAddress())
