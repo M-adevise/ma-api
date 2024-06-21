@@ -218,7 +218,7 @@ paths:
         - Activity
       summary: Read an appointment
       operationId: readAppointment
-      security: [ ]
+      security: []
       parameters:
         - name: id
           in: path
@@ -313,7 +313,7 @@ paths:
         - Activity
       summary: Get all appointments of a patient
       operationId: getPatientsAppointments
-      security: [ ]
+      security: []
       parameters:
         - name: id
           in: path
@@ -384,7 +384,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Doctor'
+              $ref: "#/components/schemas/Doctor"
       responses:
         "200":
           description: Crupdated doctor
@@ -488,7 +488,7 @@ paths:
         500:
           $ref: "#/components/responses/500"
 
-  /patients/{id}/medical_info:
+  /patients/{id}/medicalInfo:
     get:
       tags:
         - Activity
@@ -712,20 +712,20 @@ components:
       properties:
         id:
           type: string
-        last_name:
+        lastName:
           type: string
-        authentication_id:
+        authenticationId:
           type: string
-        first_name:
+        firstName:
           type: string
         nic:
           type: string
-        birth_date:
+        birthDate:
           type: string
           format: date-time
         email:
           type: string
-        photo_id:
+        photoId:
           type: string
         sex:
           type: string
@@ -754,8 +754,8 @@ components:
         branch:
           type: string
         department:
-          $ref: '#/components/schemas/Department'
-        registry_number:
+          $ref: "#/components/schemas/Department"
+        registryNumber:
           type: string
 
     PatientAdditionalInfo:
@@ -763,16 +763,16 @@ components:
       properties:
         profession:
           type: string
-        education_level:
+        educationLevel:
           type: string
-        civil_status:
+        civilStatus:
           type: string
           enum:
             - BACHELOR
             - ENGAGED
             - MARRIED
             - OTHER
-        blood_type:
+        bloodType:
           type: string
         allergies:
           type: array
@@ -814,9 +814,9 @@ components:
     FeedbackSummary:
       type: object
       properties:
-        total_feedbacks:
+        totalFeedbacks:
           type: integer
-        total_score:
+        totalScore:
           type: integer
         feedbacks:
           type: array
@@ -831,9 +831,9 @@ components:
           type: string
         score:
           type: integer
-        creation_datetime:
+        creationDatetime:
           type: string
-          format: 'date-time'
+          format: "date-time"
 
     Appointment:
       type: object
@@ -852,23 +852,26 @@ components:
         to:
           type: string
           format: date-time
+        roomId:
+          type: string
+          format: uuid
 
     MedicalInfo:
       type: object
       properties:
         patient:
           $ref: "#/components/schemas/Patient"
-        patient_additional_info:
+        patientAdditionalInfo:
           $ref: "#/components/schemas/PatientAdditionalInfo"
-        continual_postoperative:
+        continualPostoperative:
           type: array
           items:
             type: object
             properties:
               date:
                 type: string
-                format: 'date-time'
-              parameter_control:
+                format: "date-time"
+              parameterControl:
                 type: string
               care:
                 type: string
@@ -888,20 +891,20 @@ components:
                 type: string
               description:
                 type: string
-              treatment_start:
+              treatmentStart:
                 type: string
-                format: 'date-time'
-              treatment_end:
+                format: "date-time"
+              treatmentEnd:
                 type: string
-                format: 'date-time'
+                format: "date-time"
               hospital:
                 type: string
                 description: hospital name
-              doctor_name:
+              doctorName:
                 type: string
-        creation_datetime:
+        creationDatetime:
           type: string
-          format: 'date-time'
+          format: "date-time"
 
     Page:
       type: integer
