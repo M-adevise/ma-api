@@ -2,10 +2,6 @@ FROM gradle:8.5-jdk17 AS build
 
 ARG DB_URL
 ENV DB_URL=$DB_URL
-ARG DB_NAME
-ENV DB_NAME=$DB_NAME
-ARG DB_PASSWORD
-ENV DB_PASSWORD=$DB_PASSWORD
 ARG GEMINI_PROJECT_ID
 ENV GEMINI_PROJECT_ID=$GEMINI_PROJECT_ID
 ARG GEMINI_LOCATION
@@ -27,6 +23,6 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build -x test
 
 FROM openjdk:17 AS final
-COPY --from=build /app/build/libs/route.jar /app/greenroute.jar
+COPY --from=build /app/build/libs/advise.jar /app/advise.jar
 EXPOSE 80
-CMD ["java", "-jar", "/app/greenroute.jar"]
+CMD ["java", "-jar", "/app/advise.jar"]
