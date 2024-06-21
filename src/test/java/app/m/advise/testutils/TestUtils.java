@@ -9,11 +9,13 @@ import static org.mockito.Mockito.when;
 
 import app.m.advise.endpoint.rest.client.ApiClient;
 import app.m.advise.endpoint.rest.model.Appointment;
+import app.m.advise.endpoint.rest.model.Channel;
 import app.m.advise.endpoint.rest.model.Department;
 import app.m.advise.endpoint.rest.model.DepartmentAdvisor;
 import app.m.advise.endpoint.rest.model.Doctor;
 import app.m.advise.endpoint.rest.model.Feedback;
 import app.m.advise.endpoint.rest.model.Hospital;
+import app.m.advise.endpoint.rest.model.Message;
 import app.m.advise.endpoint.rest.model.Patient;
 import app.m.advise.endpoint.rest.model.User;
 import app.m.advise.service.api.firebase.FUser;
@@ -38,6 +40,10 @@ public class TestUtils {
   public static String DOCTOR1_TOKEN = "doctor1_token";
   public static String PATIENT1_TOKEN = "patient1_token";
   public static String BAD_TOKEN = "bad_token";
+  public static String CHANNEL1_ID = "channel1_id";
+  public static String CHANNEL2_ID = "channel2_id";
+  public static String MESSAGE_ID = "message1_id";
+  public static String MESSAGE2_ID = "message2_id";
 
   public static ApiClient anApiClient(String token, int serverPort) {
     ApiClient client = new ApiClient();
@@ -93,6 +99,32 @@ public class TestUtils {
         .sex(User.SexEnum.MALE)
         .role(DOCTOR)
         .authenticationId(DOCTOR1_AUTHENTICATION_ID);
+  }
+
+  public static Channel channel1() {
+    return new Channel().id(CHANNEL1_ID).creator(doctor1().getId()).invited(patient1().getId());
+  }
+
+  public static Channel channel2() {
+    return new Channel().id(CHANNEL2_ID).creator(doctor1().getId()).invited(patient2().getId());
+  }
+
+  public static Message message() {
+    return new Message()
+        .id(MESSAGE_ID)
+        .senderId(doctor1().getId())
+        .receiverId(patient1().getId())
+        .content("Hello")
+        .attachment(null);
+  }
+
+  public static Message message2() {
+    return new Message()
+        .id(MESSAGE2_ID)
+        .senderId(doctor1().getId())
+        .receiverId(patient1().getId())
+        .content("How are you?")
+        .attachment(null);
   }
 
   public static Doctor doctor1() {
