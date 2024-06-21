@@ -674,6 +674,122 @@ paths:
         500:
           $ref: "#/components/responses/500"
 
+  /users/{id}/channels:
+    get:
+      tags:
+        - Communication
+      summary: Get user channels
+      operationId: getChannels
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of channels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+        500:
+          $ref: "#/components/responses/500"
+  /channel/{id}:
+    put:
+      tags:
+        - Communication
+      summary: Crupdate channel
+      operationId: crupdateChannel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Channel'
+      responses:
+        200:
+          description: Created channel
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+        500:
+          $ref: "#/components/responses/500"
+
+  /channels/{id}/messages:
+    get:
+      tags:
+        - Communication
+      summary: Get channel's messages
+      operationId: getMessageByChannelId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        500:
+          $ref: "#/components/responses/500"
+  /channels/{id}/messages/{mId}:
+    put:
+      tags:
+        - Communication
+      summary: Crupdate a message for channel
+      operationId: crupdateMessage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: mId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        200:
+          description: Created Message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        500:
+          $ref: "#/components/responses/500"
+
+
 components:
   responses:
     400:
@@ -778,6 +894,7 @@ components:
           type: array
           items:
             type: string
+
     Patient:
       allOf:
         - $ref: "#/components/schemas/User"
@@ -788,6 +905,7 @@ components:
           description: Current doctor
         documentId:
           type: string
+
     Department:
       type: object
       properties:
@@ -802,6 +920,32 @@ components:
           properties:
             schemas:
               $ref: "#/components/schemas/User"
+    Channel:
+      type: object
+      properties:
+        id:
+          type: string
+        creator:
+          type: string
+          description: Identifier of the person who send the first message
+        invited:
+          type: string
+          description: Identifier of the receiver
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        senderId:
+          type: string
+        receiverId:
+          type: string
+        content:
+          type: string
+        attachment:
+          type: string
+          format: binary
+
     Hospital:
       allOf:
         - $ref: "#/components/schemas/Department"
@@ -811,6 +955,7 @@ components:
           type: string
         stat:
           type: string
+
     FeedbackSummary:
       type: object
       properties:
