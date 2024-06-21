@@ -23,11 +23,12 @@ public class FeedbackRestMapper {
   }
 
   public FeedbackSummary toSummary(List<Feedback> feedbacks) {
+    int denominator = feedbacks.isEmpty() ? 1 : feedbacks.size();
     int score =
         feedbacks.stream()
                 .map(Feedback::getScore)
                 .reduce(0, (a, b) -> a != null ? Integer.sum(a, b) : 0)
-            / feedbacks.size();
+            / denominator;
     return new FeedbackSummary()
         .totalScore(score)
         .totalFeedbacks(feedbacks.size())
