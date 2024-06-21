@@ -114,7 +114,7 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(GET, "/raw/*")
                     .authenticated()
-                    .requestMatchers(PUT, "/channels/*")
+                    .requestMatchers(PUT, "/channel/*")
                     .authenticated()
                     .requestMatchers(new SelfUserMatcher(GET, "/users/*/channels", provider))
                     .authenticated()
