@@ -48,7 +48,7 @@ class PatientControllerIT {
     ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
-    var actual = api.getPatientsByDoctorId(DOCTOR_1_ID);
+    var actual = api.getPatientsByDoctorId(DOCTOR_1_ID, null, null);
 
     assertEquals(1, actual.size());
   }

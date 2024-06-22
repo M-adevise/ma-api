@@ -22,8 +22,10 @@ public class DoctorService {
         .orElseThrow(() -> new NotFoundException("Doctor." + id + " is not found."));
   }
 
-  public List<Doctor> getDoctors() {
-    return repository.findAll();
+  public List<Doctor> getDoctors(String firstName, String lastName) {
+    var firstNameValue = firstName == null ? "" : firstName;
+    var lastNameValue = lastName == null ? "" : lastName;
+    return repository.findByCriteria(firstNameValue, lastNameValue);
   }
 
   public Doctor crupdate(Doctor toSave) {
