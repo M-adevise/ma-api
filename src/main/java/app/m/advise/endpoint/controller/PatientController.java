@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,8 +17,13 @@ public class PatientController {
   private final PatientRestMapper mapper;
 
   @GetMapping("/doctors/{id}/patients")
-  public List<Patient> getPatientsByDoctorId(@PathVariable("id") String dId) {
-    return service.getPatientsByDoctorId(dId).stream().map(mapper::toRest).toList();
+  public List<Patient> getPatientsByDoctorId(
+      @PathVariable("id") String dId,
+      @RequestParam(value = "firstName", required = false) String firstName,
+      @RequestParam(name = "lastName", required = false) String lastName) {
+    return service.getPatientsByDoctorId(dId, firstName, lastName).stream()
+        .map(mapper::toRest)
+        .toList();
   }
 
   @GetMapping("/patients/{id}")

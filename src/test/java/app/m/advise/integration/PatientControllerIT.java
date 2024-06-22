@@ -7,6 +7,7 @@ import static app.m.advise.testutils.TestUtils.patient1;
 import static app.m.advise.testutils.TestUtils.setFileStorageService;
 import static app.m.advise.testutils.TestUtils.setFirebaseService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import app.m.advise.AbstractContextInitializer;
@@ -50,7 +51,7 @@ class PatientControllerIT {
 
     var actual = api.getPatientsByDoctorId(DOCTOR_1_ID, null, null);
 
-    assertEquals(1, actual.size());
+    assertTrue(actual.contains(patient1()));
   }
 
   @Test

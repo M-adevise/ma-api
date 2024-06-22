@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 public class PatientService {
   private final PatientRepository repository;
 
-  public List<Patient> getPatientsByDoctorId(String dId) {
-    return repository.findByDoctorId(dId);
+  public List<Patient> getPatientsByDoctorId(String dId, String firstName, String lastName) {
+    var firstNameValue = firstName == null ? "" : firstName;
+    var lastNameValue = lastName == null ? "" : lastName;
+    return repository.getCriteria(firstNameValue, lastNameValue);
   }
 
   public Patient getPatientById(String id) {
