@@ -130,6 +130,17 @@ paths:
       summary: Get list of doctors
       operationId: getDoctors
       security: []
+      parameters:
+        - name: firstName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: Required doctor
@@ -414,6 +425,16 @@ paths:
         - name: id
           in: path
           required: true
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          required: false
           schema:
             type: string
       responses:
