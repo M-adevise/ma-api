@@ -122,6 +122,8 @@ public class SecurityConf {
                     .authenticated()
                     .requestMatchers(GET, "/channels/*/messages")
                     .authenticated()
+                    .requestMatchers(PUT, "/prompts")
+                    .authenticated()
                     .anyRequest()
                     .denyAll())
         .csrf(AbstractHttpConfigurer::disable)

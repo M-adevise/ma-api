@@ -123,6 +123,26 @@ paths:
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+  /prompts:
+    put:
+      tags:
+        - AI
+      summary: send prompt
+      operationId: sendPrompt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPrompt"
+      responses:
+        200:
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromptResponse"
+        500:
+          $ref: "#/components/responses/500"
   /doctors:
     get:
       tags:
@@ -1071,6 +1091,28 @@ components:
         creationDatetime:
           type: string
           format: "date-time"
+
+    UserPrompt:
+      type: object
+      properties:
+        userId:
+          type: string
+        content:
+          type: string
+        attachement:
+          type: string
+          format: binary
+
+    PromptResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        creationDatetime:
+          type: string
+          format: date-time
 
     Page:
       type: integer
