@@ -85,10 +85,12 @@ class DoctorControllerIT {
     ApiClient client = anApiClient(DOCTOR1_TOKEN);
     UserApi api = new UserApi(client);
 
-    List<Doctor> actual = api.getDoctors();
+    List<Doctor> actual = api.getDoctors(null, null);
+    List<Doctor> actualFiltered = api.getDoctors(doctor1().getFirstName(), null);
 
     assertEquals(2, actual.size());
     assertTrue(actual.contains(doctor1()));
+    assertEquals(doctor1(), actualFiltered.get(0));
   }
 
   static class ContextInitializer extends AbstractContextInitializer {
